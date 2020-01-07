@@ -15,6 +15,9 @@
 
         <!--tkmybatis-->
         <spring-boot-mapper.version>2.1.5</spring-boot-mapper.version>
+
+        <!--pagehelper分页-->
+        <pagehelper.version>1.2.12</pagehelper.version>
     </properties>
 
     <dependencyManagement>
@@ -89,6 +92,13 @@
                 <artifactId>jackson-databind</artifactId>
                 <scope>provided</scope>
                 <version>${jackson-databind.version}</version>
+            </dependency>
+
+            <!--pagehelper分页-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
