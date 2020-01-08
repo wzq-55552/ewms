@@ -25,5 +25,13 @@
     WHERE userid = #{userid}
   </select>
 
+    <update id="updateinformation">
+      UPDATE  user_information
+        SET
+        User_psw = #{userPsw},
+        Tel = #{tel},
+        User_name = #{username}
+        WHERE userid = #{userid}
+    </update>
 
 </mapper>

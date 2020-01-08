@@ -25,7 +25,7 @@ public class LoginController {
 
     @RequestMapping(value = "login",method = RequestMethod.GET)
     public String Login(){
-        return "Login";
+        return "login";
     }
 
     @RequestMapping(value = "login",method = RequestMethod.POST)
@@ -41,13 +41,13 @@ public class LoginController {
         else{
             //将登陆信息放入会话
             httpServletRequest.getSession().setAttribute("user",userInformation);
-            httpServletRequest.getSession().setAttribute("firstid",userInformation.getUserId());
+            httpServletRequest.getSession().setAttribute("userid",userInformation.getUserId());
             httpServletRequest.getSession().setAttribute("equipment",userInformation.getUserPsw());
-            httpServletRequest.getSession().setAttribute("outType",userInformation.getUserName());
-            httpServletRequest.getSession().setAttribute("outType",userInformation.getTel());
-            httpServletRequest.getSession().setAttribute("outType",userInformation.getFrId());
-            httpServletRequest.getSession().setAttribute("outType",userInformation.getRoidId());
-            httpServletRequest.getSession().setAttribute("outType",userInformation.getPswDate());
+            httpServletRequest.getSession().setAttribute("username",userInformation.getUserName());
+            httpServletRequest.getSession().setAttribute("telephone",userInformation.getTel());
+            httpServletRequest.getSession().setAttribute("frid",userInformation.getFrId());
+            httpServletRequest.getSession().setAttribute("roidld",userInformation.getRoidId());
+            httpServletRequest.getSession().setAttribute("pswdate",userInformation.getPswDate());
             return "redirect:/main";
         }
     }

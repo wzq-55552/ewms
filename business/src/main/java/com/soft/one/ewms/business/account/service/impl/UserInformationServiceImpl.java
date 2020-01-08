@@ -32,5 +32,10 @@ public class UserInformationServiceImpl implements UserInformationService{
         return null;
     }
 
+    @Override
+    public void updateinformation(UserInformation userInformation) {
+        userInformationMapper.updateinformation(userInformation);
+    }
+
 
 }
