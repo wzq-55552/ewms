@@ -1,0 +1,88 @@
+﻿sql语句
+
+CREATE TABLE function_role(
+Fr_id nvarchar(20) NOT NULL COMMENT '功能角色ID',
+Fr_name nvarchar(20) NOT NULL COMMENT '功能角色名',
+PRIMARY KEY(Fr_id)
+) COMMENT '功能角色档';
+
+
+CREATE TABLE function_menu(
+F_id nvarchar(20) NOT NULL COMMENT '功能ID',
+F_name nvarchar(20) NOT NULL COMMENT '功能名',
+F_url nvarchar(255)  COMMENT '链接地址',
+PRIMARY KEY(F_id)
+) COMMENT '功能菜单档';
+
+
+
+CREATE TABLE operation_role(
+Roid_id nvarchar(10) NOT NULL COMMENT '操作资料角色ID',
+Roid_type nvarchar(30) NOT NULL COMMENT '操作资料角色名，即公司名',
+PRIMARY KEY(Roid_id)
+) COMMENT '操作资料角色档';
+
+
+CREATE TABLE operation_range(
+Roid_id nvarchar(10) NOT NULL COMMENT '操作资料角色ID',
+Acc_no char(4) NOT NULL COMMENT '操作资料权限',
+PRIMARY KEY(Roid_id,Acc_no),
+CONSTRAINT `fk_operation_range_role` FOREIGN KEY (Roid_id) REFERENCES `operation_role` (Roid_id)
+) COMMENT '操作资料权限档';
+
+
+
+
+CREATE TABLE function_range(
+Fr_id nvarchar(20) NOT NULL COMMENT '功能角色ID',
+F_id nvarchar(20) NOT NULL COMMENT '功能ID',
+PRIMARY KEY(Fr_id,F_id),
+CONSTRAINT `fk_function_range_role` FOREIGN KEY (Fr_id) REFERENCES `function_role` (Fr_id),
+CONSTRAINT `fk_function_range_menu` FOREIGN KEY (F_id) REFERENCES `function_menu` (F_id)
+) COMMENT '功能角色权限档';
+
+
+CREATE TABLE user_information(
+User_id nvarchar(20) NOT NULL COMMENT '用户ID,至少6个字符',
+User_psw nvarchar(20) NOT NULL COMMENT '用户密码,至少為八個字符. 需由大寫英文, 小寫英文, 數字及符號4項中的其中3項組成',
+User_name nvarchar(20) NOT NULL COMMENT '用户姓名',
+Tel nvarchar(11) COMMENT '用户手机，11位',
+Fr_id nvarchar(10) COMMENT '功能角色ID',
+Roid_id nvarchar(10) COMMENT '操作资料角色ID',
+Psw_date datetime COMMENT '密码更改日期与时间，yyyy-mm-dd hh:mm',
+PRIMARY KEY(User_id),
+CONSTRAINT `fk_user_information_operation_role` FOREIGN KEY (Roid_id) REFERENCES `operation_role` (Roid_id),
+CONSTRAINT `fk_user_information_function_role` FOREIGN KEY (Fr_id) REFERENCES `function_role` (Fr_id)
+);
+
+
+CREATE TABLE log_in(
+First_id bigint(20) NOT NULL  AUTO_INCREMENT COMMENT '自增序号',
+User_id nvarchar(20) NOT NULL COMMENT '用户ID',
+Equipment nvarchar(20) NOT NULL COMMENT '电脑/手机的MAC地址',
+In_date datetime NOT NULL COMMENT '登入时间，yyyy-mm-dd hh:mm',
+Out_date datetime  COMMENT '登出时间，yyyy-mm-dd hh:mm',
+Out_type tinyint  COMMENT '登出触发者，0：用户；1：系统',
+PRIMARY KEY(First_id),
+CONSTRAINT `fk_log_in_user_information` FOREIGN KEY (User_id) REFERENCES `user_information` (User_id)
+) COMMENT '登陆log档';
+
+
+
+CREATE TABLE control_in(
+User_id nvarchar(20) NOT NULL COMMENT '用户ID,用于判断账户是否已登陆'
+) COMMENT '登陆控制档';
+
+
+
+CREATE TABLE time_args(
+Args_date datetime NOT NULL COMMENT '记录修改参数的时间，yyyy-mm-dd hh:mm',
+User_id nvarchar(20) NOT NULL COMMENT '用户ID,记录修改参数的管理员',
+Stay_time int(20)  COMMENT '画面停留时间，以分为单位',
+Remind_time int(20)  COMMENT '定期修改密码提醒时间，以天为单位',
+PRIMARY KEY(User_id,Args_date)
+) COMMENT '时间参数档';
+
+
+
+
