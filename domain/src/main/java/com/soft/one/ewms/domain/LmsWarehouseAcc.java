@@ -2,6 +2,8 @@ package com.soft.one.ewms.domain;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * Title：仓库类
  * Description：暂时不能测试，那自己写个api,只需要2个属性，不连数据库，数据后端定义就可以
@@ -10,7 +12,7 @@ import lombok.Data;
  * @date 2020/1/8
  */
 @Data
-public class LmsWarehouseAcc {
+public class LmsWarehouseAcc implements Serializable {
 
     //仓库号
     private String acc_no;
