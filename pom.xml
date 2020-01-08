@@ -28,6 +28,7 @@
         <module>commons</module>
         <module>business</module>
         <module>domain</module>
+        <module>api</module>
     </modules>
 
     <!--依赖管理-->
