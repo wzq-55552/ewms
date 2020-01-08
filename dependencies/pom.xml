@@ -18,6 +18,8 @@
 
         <!--pagehelper分页-->
         <pagehelper.version>1.2.12</pagehelper.version>
+
+        <javax-persistence.version>1.0</javax-persistence.version>
     </properties>
 
     <dependencyManagement>
@@ -99,6 +101,14 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.version}</version>
+            </dependency>
+
+            <!--Servlet Begin-->
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <scope>compile</scope>
+                <version>${javax-persistence.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
