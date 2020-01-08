@@ -1,10 +1,5 @@
 debug: true
 spring:
-  devtools:
-    restart:
-      enabled: true  #设置开启热部署
-    freemarker:
-      cache: false    #页面不加载缓存，修改即时生效
 
   thymeleaf:
     cache: false # 开发时关闭缓存,不然没法看到实时页面

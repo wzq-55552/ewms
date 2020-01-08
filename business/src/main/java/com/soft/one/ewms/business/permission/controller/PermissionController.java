@@ -27,7 +27,7 @@ public class PermissionController {
     @GetMapping("/")
     public void test(){
         //获取json,先启动api模块，不然没有数据
-        Response response  = OkHttpClientUtil.getInstance().getData("http://localhost:8081/api/acc/all");
+        Response response  = OkHttpClientUtil.getInstance().getData("http://localhost:8082/api/acc/all");
 
         try{
             //解析json
