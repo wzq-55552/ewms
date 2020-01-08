@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  *@Version 1.0
  */
 
-public class EditUserInformation {
+public class EditUserInformationController {
 
     @Autowired
     UserInformationService userInformationService;
