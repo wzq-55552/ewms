@@ -16,4 +16,22 @@
     <!--@mbg.generated-->
     User_id, User_psw, User_name, Tel, Fr_id, Roid_id, Psw_date
   </sql>
+
+  <select id="selectByPrimaryKey" resultType="UserInformation">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    log_in
+    WHERE userid = #{userid}
+  </select>
+
+    <update id="updateinformation">
+      UPDATE  user_information
+        SET
+        User_psw = #{userPsw},
+        Tel = #{tel},
+        User_name = #{username}
+        WHERE userid = #{userid}
+    </update>
+
 </mapper>

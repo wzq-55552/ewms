@@ -29,7 +29,7 @@ public class LmsWarehouseAcc implements Serializable {
         this.acc_no = acc_no;
         this.acc_type = acc_type;
     }
-
+    
     public LmsWarehouseAcc() {
 
     }

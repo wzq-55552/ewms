@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ControlIn implements Serializable {
     /**
-    * 用户ID,用于判断账户是否已登陆
-    */
+     * 用户ID,用于判断账户是否已登陆
+     */
     private String userId;
 
     private static final long serialVersionUID = 1L;
