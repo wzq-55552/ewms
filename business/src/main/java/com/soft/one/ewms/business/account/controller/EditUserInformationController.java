@@ -30,14 +30,15 @@ public class EditUserInformationController {
     }
 
     @RequestMapping(value = "editinformation",method = RequestMethod.POST)
-    public String editinformation(String username, String tel,String userPsw, HttpServletRequest httpServletRequest){
+    public String editinformation(String username, String userid,String userPsw, HttpServletRequest httpServletRequest){
         UserInformation userInformation = userInformationService.selectByPrimaryKey((String) httpServletRequest.getSession().getAttribute("userid"));
         userInformation.setUserName(username);
         userInformation.setUserPsw(userPsw);
-        userInformation.setTel(tel);
+        userInformation.setUserId(userid);
         userInformationService.updateinformation(userInformation);
         return "redirect:/login";
     }
+
 
 
 

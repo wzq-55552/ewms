@@ -1,15 +1,15 @@
 package com.soft.one.ewms.business.account.service.impl;
 
-import com.soft.one.ewms.domain.LogIn;
+
 import com.soft.one.ewms.domain.UserInformation;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+
 
 import com.soft.one.ewms.business.account.mapper.UserInformationMapper;
 import com.soft.one.ewms.business.account.service.UserInformationService;
 
-import java.util.Date;
+
 
 @Service
 public class UserInformationServiceImpl implements UserInformationService{
@@ -19,7 +19,7 @@ public class UserInformationServiceImpl implements UserInformationService{
 
     @Override
     public UserInformation selectByPrimaryKey(String userid) {
-        //通过userid查找账号密码
+        //通过userid查找Userinformation
         return userInformationMapper.selectByPrimaryKey(userid);
     }
 
@@ -37,6 +37,11 @@ public class UserInformationServiceImpl implements UserInformationService{
     @Override
     public void updateinformation(UserInformation userInformation) {
         userInformationMapper.updateinformation(userInformation);
+    }
+
+    @Override
+    public void setuserinfo(UserInformation userInformation) {
+        userInformationMapper.setuserinfo(userInformation);
     }
 
 

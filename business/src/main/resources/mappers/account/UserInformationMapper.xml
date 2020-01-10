@@ -34,4 +34,13 @@
         WHERE userid = #{userid}
     </update>
 
+    <update id="setuserinfo">
+      UPDATE  user_information
+        SET
+        User_psw = #{userPsw},
+        User_name = #{username}
+        WHERE userid = #{userid}
+    </update>
+
+
 </mapper>

@@ -52,7 +52,7 @@ public class LoginController {
             model.addAttribute("message","登录失败，请输入正确的账号密码。");
             return Login();
         }
-        else if( JudgeLogin(userId,httpServletRequest) == true){
+        else if( JudgeLogin(userId) ){
             model.addAttribute("message","登录失败,此用户已登录。");
             return Login();
         }
@@ -79,11 +79,16 @@ public class LoginController {
         }
     }
 
-    public boolean JudgeLogin(String userid,HttpServletRequest httpServletRequest){
-        httpServletRequest.getSession().setAttribute("userid",userid);
+    /**
+     * 判断此用户是否在登录
+     * @param userid
+     * @return
+     */
+    public boolean JudgeLogin(String userid){
+
         List<ControlIn> result = controlInService.selectAll();
         for (ControlIn controlIn : result) {
-            if("userid".equals(controlIn.getUserId())){
+            if(userid.equals(controlIn.getUserId())){
                 return true;
             }
         }
