@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>business</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <licenses>
         <license>
