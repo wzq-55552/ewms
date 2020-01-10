@@ -14,8 +14,6 @@ import java.io.Serializable;
 @Data
 public class ResponseResult<T> implements Serializable {
 
-    private static final long serialVersionUID = 3468352004150968551L;
-
     /**
      * 状态码
      */
@@ -120,23 +118,25 @@ public class ResponseResult<T> implements Serializable {
     }
 
    /**
-    * Title：通用状态码
+    * Title：自定义的通用状态码
     * Description：
     * @author WZQ
     * @version 1.0.0
     * @date 2020/1/4
     */
     public class CodeStatus {
+        //成功跟失败都是对应旭日那边的0，-1
         /**
          * 请求成功
          */
-        public static final int OK = 20000;
+        public static final int OK = 0;
 
         /**
          * 请求失败
          */
-        public static final int FAIL = 20002;
+        public static final int FAIL = -1;
 
+        //下面的用不到
         /**
          * 熔断请求
          */
