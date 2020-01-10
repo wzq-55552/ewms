@@ -40,4 +40,9 @@ public class OperationRangeServiceImpl implements OperationRangeService{
     public void delete(OperationRange operationRange) {
         operationRangeMapper.deleteByPrimaryKey(operationRange);
     }
+
+    @Override
+    public OperationRange selectById(OperationRange operationRange) {
+        return operationRangeMapper.selectByPrimaryKey(operationRange);
+    }
 }

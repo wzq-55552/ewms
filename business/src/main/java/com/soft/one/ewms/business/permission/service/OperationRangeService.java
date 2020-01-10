@@ -12,4 +12,5 @@ public interface OperationRangeService{
     void update(OperationRange operationRange);
     void delete(OperationRange operationRange);
 
+    OperationRange selectById(OperationRange operationRange);
 }

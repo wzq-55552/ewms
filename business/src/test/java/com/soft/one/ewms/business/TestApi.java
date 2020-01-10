@@ -12,25 +12,18 @@ import com.soft.one.ewms.domain.LmsWarehouseAcc;
 import okhttp3.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestApi {
 
-    private static Logger logger = LoggerFactory.getLogger(TestApi.class);
+
 
     /**
      * 测试获取和解析json
@@ -81,13 +74,6 @@ public class TestApi {
     }
 
 
-    /**
-     * 测试获取当前设备IP
-     */
-    @Test
-    public void testmac(){
-
-    }
 
     /**
      * 测试FunctionRole
