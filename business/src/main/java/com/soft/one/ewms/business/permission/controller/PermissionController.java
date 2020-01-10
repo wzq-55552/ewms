@@ -40,9 +40,10 @@ public class PermissionController {
      */
     @GetMapping("/get/acc/nos")
     public ResponseResult<List<LmsWarehouseAcc>>getAccNo(){
+        System.out.println("111");
         //获取json,先启动api模块，不然没有数据
         ResponseResult<List<LmsWarehouseAcc>> result = new ResponseResult<>();
-        Response response  = OkHttpClientUtil.getInstance().getData("http://localhost:8081/api/acc/all");
+        Response response  = OkHttpClientUtil.getInstance().getData("http://localhost:8082/api/acc/all");
         try{
             //解析json
             String jsonString = response.body().string();//json格式数据
