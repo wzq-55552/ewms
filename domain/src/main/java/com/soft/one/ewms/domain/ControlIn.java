@@ -21,6 +21,5 @@ public class ControlIn implements Serializable {
      */
     private String userId;
 
-    private static final long serialVersionUID = 1L;
 
 }

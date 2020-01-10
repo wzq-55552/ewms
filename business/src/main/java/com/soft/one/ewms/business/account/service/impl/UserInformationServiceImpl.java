@@ -4,6 +4,8 @@ import com.soft.one.ewms.domain.LogIn;
 import com.soft.one.ewms.domain.UserInformation;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 import com.soft.one.ewms.business.account.mapper.UserInformationMapper;
 import com.soft.one.ewms.business.account.service.UserInformationService;
 

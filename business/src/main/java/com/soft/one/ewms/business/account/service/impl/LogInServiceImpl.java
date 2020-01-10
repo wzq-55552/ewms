@@ -6,8 +6,7 @@ import javax.annotation.Resource;
 import com.soft.one.ewms.business.account.mapper.LogInMapper;
 import com.soft.one.ewms.business.account.service.LogInService;
 
-import java.util.Date;
-import java.util.List;
+
 
 @Service
 public class LogInServiceImpl implements LogInService{
@@ -16,7 +15,8 @@ public class LogInServiceImpl implements LogInService{
     private LogInMapper logInMapper;
 
 
-
-
-
+    @Override
+    public void insertlogininformation(LogIn login) {
+        logInMapper.insert(login);
+    }
 }

@@ -35,9 +35,7 @@ public class GetMacAddress {
             throw new IOException("Unknow operating system:" + os);
         }
 
-
         final Process process = Runtime.getRuntime().exec(command);
-
 
         BufferedReader bufReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         for (String line = null ; (line = bufReader.readLine()) != null ;) {
@@ -47,13 +45,10 @@ public class GetMacAddress {
                 //macAddressList.add(matcher.group(1).replaceAll("[-:]", ""));//去掉MAC中的“-”
             }
         }
-
-
         process.destroy();
         bufReader.close();
         return macAddressList;
     }
-
 
     public static String getMacAddress() {
         if (macAddressStr == null || macAddressStr.equals("")) {
@@ -71,36 +66,25 @@ public class GetMacAddress {
             catch (IOException e) {
                 e.printStackTrace();
             }
-
-
             macAddressStr = sb.toString();
-
-
         }
-
-
         return macAddressStr;
     }
-
-
     public static String getComputerName() {
         if (computerName == null || computerName.equals("")) {
             computerName = System.getenv().get("COMPUTERNAME");
         }
-
-
         return computerName;
     }
-
-
     private GetMacAddress() {
-
-
     }
 
-
-    public static void main(String[] args) {
-        System.out.println(GetMacAddress.getMacAddress());
-        System.out.println(GetMacAddress.getComputerName());
+    public static String getOnly(){
+        return GetMacAddress.getMacAddress();
     }
+
+//    public static void main(String[] args) {
+//        System.out.println(GetMacAddress.getMacAddress());
+//        System.out.println(GetMacAddress.getComputerName());
+//    }
 }
