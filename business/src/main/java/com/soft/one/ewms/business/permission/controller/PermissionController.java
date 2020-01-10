@@ -9,9 +9,7 @@ import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +20,7 @@ import java.util.List;
  * @version 1.0.0
  * @date 2020/1/8
  */
-@Controller
+@RestController
 public class PermissionController {
 
     @Autowired
@@ -40,8 +38,7 @@ public class PermissionController {
      * 获取仓库号和仓库类型json数据
      * @return
      */
-    @ResponseBody
-    @GetMapping("/getAllAccNo")
+    @GetMapping("/get/acc/nos")
     public ResponseResult<List<LmsWarehouseAcc>>getAccNo(){
         //获取json,先启动api模块，不然没有数据
         ResponseResult<List<LmsWarehouseAcc>> result = new ResponseResult<>();
@@ -64,8 +61,7 @@ public class PermissionController {
      * 获取所有的操作角色
      * @return
      */
-    @ResponseBody
-    @GetMapping("/getOperationRoles")
+    @GetMapping("/get/operation/roles")
     public ResponseResult<List<OperationRole>> getOperationRoles(){
         ResponseResult<List<OperationRole>> result = new ResponseResult<>();
         result.setCode(ResponseResult.CodeStatus.OK);
@@ -79,8 +75,7 @@ public class PermissionController {
      * @param operationRole
      * @return
      */
-    @ResponseBody
-    @PostMapping("/addOperationRole")
+    @PostMapping("/add/operation/role")
     public ResponseResult<OperationRole>addOperationRole(OperationRole operationRole){
         ResponseResult<OperationRole> result = new ResponseResult<>();
         if(StringUtils.isEmpty(operationRole.getRoidId())){
@@ -105,8 +100,7 @@ public class PermissionController {
      * @param operationRole
      * @return
      */
-    @ResponseBody
-    @PostMapping("/updateOperationRole")
+    @PostMapping("/update/operation/role")
     public ResponseResult<OperationRole>updateOperationRole(OperationRole operationRole){
         ResponseResult<OperationRole> result = new ResponseResult<>();
         //如果传进的id不存在，不能修改
@@ -127,8 +121,7 @@ public class PermissionController {
      * @param operationRole
      * @return
      */
-    @ResponseBody
-    @PostMapping("/deleteOperationRole")
+    @PostMapping("/delete/operation/role")
     public ResponseResult<OperationRole>deleteOperationRole(OperationRole operationRole){
         ResponseResult<OperationRole> result = new ResponseResult<>();
         //如果传进的id不存在，不能删除
@@ -149,9 +142,8 @@ public class PermissionController {
      * @param operationRange
      * @return
      */
-    @ResponseBody
-    @GetMapping("/getAccNo")
-    public ResponseResult<List<String>>getAccNoByOperationRange(OperationRange operationRange){
+    @GetMapping("/get/operation/range")
+    public ResponseResult<List<String>> getOperationRange(OperationRange operationRange) {
         ResponseResult<List<String>>result = new ResponseResult<>();
         if(operationRange.getRoidId()==null){
             result.setCode(ResponseResult.CodeStatus.FAIL);
@@ -165,13 +157,104 @@ public class PermissionController {
         return result;
     }
 
+    /**
+     * 更新操作角色拥有的操作权限
+     *
+     * @param source,target
+     * @return
+     */
 
+    //暂时不可用
+    @PostMapping("/update/operation/range")
+    public ResponseResult<OperationRange> updateOperationRange(OperationRange source, OperationRange target) {
+        ResponseResult<OperationRange> result = new ResponseResult<>();
+        //数据库中没有找到，不能更新
+        if (operationRangeService.selectById(source) == null) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("更新失败");
+        } else {
+            operationRangeService.update(target);
+            result.setCode(ResponseResult.CodeStatus.OK);
+            result.setMessage("更新成功");
+            result.setData(target);
+        }
+        return result;
+
+
+    }
+
+    /**
+     * 新增操作角色拥有的操作权限
+     *
+     * @param operationRange
+     * @return
+     */
+    @PostMapping("/add/operation/range")
+    public ResponseResult<OperationRange> addOperationRange(OperationRange operationRange) {
+        ResponseResult<OperationRange> result = new ResponseResult<>();
+        Response response = OkHttpClientUtil.getInstance().getData("http://localhost:8081/api/acc/all");
+        List<LmsWarehouseAcc> jsonList = null;
+        try {
+            //解析json
+            String jsonString = response.body().string();//json格式数据
+            jsonList = MapperUtils.json2listByTree(jsonString, "data", LmsWarehouseAcc.class);
+            ;//找到“data”解析解析成List
+        } catch (Exception e) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("新增失败，获取失败AccNo失败");
+            return result;
+        }
+        //操作权限并不存在，非法新增
+        if (!jsonList.contains(new LmsWarehouseAcc(operationRange.getAccNo(), null))) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("新增失败，该操作权限不存在");
+            return result;
+        }
+        //操作角色并不存在,非法新增
+        if (operationRoleService.selectById(new OperationRole(operationRange.getRoidId(), "")) == null) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("新增失败,该操作角色不存在");
+            return result;
+        }
+        //数据库已有该记录
+        if (operationRangeService.selectById(operationRange) != null) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("新增失败,数据库中已经存在");
+            return result;
+        } else {
+            operationRangeService.insert(operationRange);
+            result.setCode(ResponseResult.CodeStatus.OK);
+            result.setData(operationRange);
+            result.setMessage("新增成功");
+        }
+        return result;
+    }
+
+    /**
+     * 删除操作角色拥有的操作权限
+     *
+     * @param operationRange
+     * @return
+     */
+    @PostMapping("/delete/operation/range")
+    public ResponseResult<OperationRange> deleteOperationRange(OperationRange operationRange) {
+        ResponseResult<OperationRange> result = new ResponseResult<>();
+        if (operationRangeService.selectById(operationRange) == null) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("删除失败，数据库无此记录");
+        } else {
+            operationRangeService.delete(operationRange);
+            result.setCode(ResponseResult.CodeStatus.OK);
+            result.setMessage("删除成功");
+            result.setData(operationRange);
+        }
+        return result;
+    }
 
     /**
      * 获取所有的功能菜单
      */
-    @ResponseBody
-    @GetMapping("/getFunctionMenus")
+    @GetMapping("/get/function/menus")
     public ResponseResult<FunctionMenu> getFunctionMenu(){
         ResponseResult result = new ResponseResult();
         List<FunctionMenu> functionMenus = functionMenuService.selectAll();
@@ -186,8 +269,7 @@ public class PermissionController {
      * @param functionMenu
      * @return
      */
-    @ResponseBody
-    @PostMapping("/updateFunctionMenu")
+    @PostMapping("/update/function/menu")
     public ResponseResult<FunctionMenu>updateFunctionMenu(FunctionMenu functionMenu){
         ResponseResult<FunctionMenu> result = new ResponseResult<>();
         FunctionMenu temp = functionMenuService.selectById(functionMenu);
@@ -208,8 +290,7 @@ public class PermissionController {
      * @param functionMenu
      * @return
      */
-    @ResponseBody
-    @PostMapping("/addFunctionMenu")
+    @PostMapping("/add/function/menu")
     public ResponseResult<FunctionMenu>addFunctionMenu(FunctionMenu functionMenu){
         ResponseResult<FunctionMenu> result = new ResponseResult<>();
         //传入的功能菜单id为空串，不合法
@@ -235,19 +316,27 @@ public class PermissionController {
      * @param functionMenu
      * @return
      */
-    @ResponseBody
-    @PostMapping("/deleteFunctionMenu")
-    public ResponseResult<FunctionMenu>deleteFunctionMenu(FunctionMenu functionMenu){
+    @PostMapping("/delete/function/menu")
+    public ResponseResult<FunctionMenu> deleteFunctionMenu(FunctionMenu functionMenu) {
         ResponseResult<FunctionMenu> result = new ResponseResult<>();
-        if(functionMenuService.selectById(functionMenu)!=null){
+
+
+        if (functionMenuService.selectById(functionMenu) == null) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("删除失败，id不存在");
+        }
+        //检查functionRange是否有该功能角色，有则不允许删除
+        else if (functionRangeService.selectFrIdByExample(new FunctionRange(null, functionMenu.getFId())).size() != 0) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("删除失败,请先删除被分配的功能");
+            return result;
+        } else {
             functionMenuService.delete(functionMenu);
             result.setCode(ResponseResult.CodeStatus.OK);
             result.setMessage("删除成功");
             result.setData(functionMenu);
-        }else{
-            result.setCode(ResponseResult.CodeStatus.FAIL);
-            result.setMessage("删除失败，id不存在");
         }
+
         return result;
     }
 
@@ -255,8 +344,7 @@ public class PermissionController {
      * 获取所有的功能角色
      * @return
      */
-    @ResponseBody
-    @GetMapping("/getFunctionRoles")
+    @GetMapping("/get/function/roles")
     public ResponseResult<List<FunctionRole>> getFunctionRoles(){
         ResponseResult<List<FunctionRole>> result = new ResponseResult<>();
         List<FunctionRole> functionRoles = functionRoleService.selectAll();
@@ -271,8 +359,7 @@ public class PermissionController {
      * @param functionRole
      * @return
      */
-    @ResponseBody
-    @PostMapping("/addFunctionRole")
+    @PostMapping("/add/function/role")
     public ResponseResult<FunctionRole>addFunctionRole(FunctionRole functionRole){
         ResponseResult<FunctionRole> result = new ResponseResult<>();
         //传入的功能角色id为空串，不合法
@@ -298,8 +385,7 @@ public class PermissionController {
      * @param functionRole
      * @return
      */
-    @ResponseBody
-    @PostMapping("/updateFunctionRole")
+    @PostMapping("/update/function/role")
     public ResponseResult<FunctionRole>updateFunctionRole(FunctionRole functionRole){
         ResponseResult<FunctionRole> result = new ResponseResult<>();
         if(functionRoleService.selectById(functionRole)==null){
@@ -319,18 +405,25 @@ public class PermissionController {
      * @param functionRole
      * @return
      */
-    @ResponseBody
-    @PostMapping("/deleteFunctionRole")
+    @PostMapping("/delete/function/role")
     public ResponseResult<FunctionRole>deleteFunctionRole(FunctionRole functionRole){
         ResponseResult<FunctionRole>result = new ResponseResult<>();
-        if(functionRoleService.selectById(functionRole)!=null){
+
+        if (functionRoleService.selectById(functionRole) == null) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("删除失败,记录不存在");
+            return result;
+        }
+        //检查functionRange是否有该功能角色，有则不允许删除
+        else if (functionRangeService.selectFIdByExample(new FunctionRange(functionRole.getFrId(), null)).size() != 0) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("删除失败,请先删除该功能角色拥有的功能");
+            return result;
+        } else {
             functionRoleService.delete(functionRole);
             result.setCode(ResponseResult.CodeStatus.OK);
             result.setMessage("删除成功");
             result.setData(functionRole);
-        }else{
-            result.setCode(ResponseResult.CodeStatus.FAIL);
-            result.setMessage("删除失败,id不存在");
         }
         return result;
     }
@@ -338,10 +431,9 @@ public class PermissionController {
     /**
      * 根据功能角色Id获取其拥有权限的功能列表
      * @param functionRange
-     * @return ResponseResult<List<String>>
+     * @return ResponseResult<List   <   String>>
      */
-    @ResponseBody
-    @GetMapping("/getFunctionRange")
+    @GetMapping("/get/function/range")
     public ResponseResult<List<String>> getFunctionRange(FunctionRange functionRange){
         ResponseResult result = new ResponseResult();
         String frId = functionRange.getFrId();
@@ -349,11 +441,84 @@ public class PermissionController {
         if(StringUtils.isEmpty(frId)){
             result.setCode(ResponseResult.CodeStatus.FAIL);
             result.setMessage("功能角色id不能为空");
-        }else {
+        } else {
             functionRange.setFId(null);
             result.setCode(ResponseResult.CodeStatus.OK);
-            result.setData(functionRangeService.selectByFrId(functionRange));
+            result.setData(functionRangeService.selectFIdByExample(functionRange));
             result.setMessage("获取成功");
+        }
+        return result;
+    }
+
+    /**
+     * 新增功能角色的功能
+     *
+     * @param functionRange
+     * @return
+     */
+    @PostMapping("/add/function/range")
+    public ResponseResult<FunctionRange> addFunctionRange(FunctionRange functionRange) {
+        ResponseResult<FunctionRange> result = new ResponseResult<>();
+        if (functionRoleService.selectById(new FunctionRole(functionRange.getFrId(), null)) == null) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("新增失败，该功能角色不存在");
+            return result;
+        } else if (functionMenuService.selectById(new FunctionMenu(functionRange.getFId(), null, null)) == null) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("新增失败，该功能菜单不存在");
+            return result;
+        } else if (functionRangeService.selectById(functionRange) != null) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("新增失败，该记录已存在");
+            return result;
+        } else {
+            functionRangeService.insert(functionRange);
+            result.setCode(ResponseResult.CodeStatus.OK);
+            result.setMessage("新增成功");
+            result.setData(functionRange);
+        }
+        return result;
+    }
+
+    /**
+     * 删除功能角色的功能
+     *
+     * @param functionRange
+     * @return
+     */
+    @PostMapping("/delete/function/range")
+    public ResponseResult<FunctionRange> deleteFunctionRange(FunctionRange functionRange) {
+        ResponseResult<FunctionRange> result = new ResponseResult<>();
+        if (functionRangeService.selectById(functionRange) == null) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("新增失败，该记录不存在");
+        } else {
+            functionRangeService.delete(functionRange);
+            result.setCode(ResponseResult.CodeStatus.OK);
+            result.setMessage("新增成功");
+            result.setData(functionRange);
+        }
+        return result;
+    }
+
+
+    /**
+     * 修改功能角色的功能
+     *
+     * @param functionRange
+     * @return
+     */
+    @PostMapping("/update/function/range")
+    public ResponseResult<FunctionRange> updateFunctionRange(FunctionRange functionRange) {
+        ResponseResult<FunctionRange> result = new ResponseResult<>();
+        if (functionRangeService.selectById(functionRange) == null) {
+            result.setCode(ResponseResult.CodeStatus.FAIL);
+            result.setMessage("更新失败，该记录不存在");
+        } else {
+            functionRangeService.update(functionRange);
+            result.setCode(ResponseResult.CodeStatus.OK);
+            result.setMessage("修改成功");
+            result.setData(functionRange);
         }
         return result;
     }

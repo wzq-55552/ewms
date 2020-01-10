@@ -4,11 +4,13 @@ package com.soft.one.ewms.business;
 import com.soft.one.ewms.business.permission.service.FunctionMenuService;
 import com.soft.one.ewms.business.permission.service.FunctionRangeService;
 import com.soft.one.ewms.business.permission.service.FunctionRoleService;
+import com.soft.one.ewms.business.permission.service.OperationRangeService;
 import com.soft.one.ewms.commons.utils.MapperUtils;
 import com.soft.one.ewms.commons.utils.OkHttpClientUtil;
 import com.soft.one.ewms.domain.FunctionMenu;
 import com.soft.one.ewms.domain.FunctionRole;
 import com.soft.one.ewms.domain.LmsWarehouseAcc;
+import com.soft.one.ewms.domain.OperationRange;
 import okhttp3.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -98,4 +100,23 @@ public class TestApi {
         froleS.insert(functionRole);
     }
 
+    @Autowired
+    private OperationRangeService operationRangeService;
+
+    @Test
+    public void testDeleteOperationRange() {
+        OperationRange operationRange = new OperationRange();
+        operationRange.setAccNo("AV01");
+        operationRangeService.delete(operationRange);
+
+    }
+
+    @Test
+    public void testSelectOperationRange() {
+        OperationRange operationRange;
+        operationRange = operationRangeService.selectById(new OperationRange(null, "AV01"));
+        if (operationRange != null)
+            System.out.println(operationRange.getRoidId() + operationRange.getAccNo());
+
+    }
 }

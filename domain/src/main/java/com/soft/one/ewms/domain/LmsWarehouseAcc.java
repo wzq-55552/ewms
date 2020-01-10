@@ -3,6 +3,7 @@ package com.soft.one.ewms.domain;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Title：仓库类
@@ -32,6 +33,14 @@ public class LmsWarehouseAcc implements Serializable {
     
     public LmsWarehouseAcc() {
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LmsWarehouseAcc that = (LmsWarehouseAcc) o;
+        return Objects.equals(acc_no, that.acc_no);
     }
 
 

@@ -6,5 +6,15 @@ import java.util.List;
 
 public interface FunctionRangeService{
 
-    List<String> selectByFrId(FunctionRange f);
+    List<String> selectFIdByExample(FunctionRange functionRange);
+
+    List<String> selectFrIdByExample(FunctionRange functionRange);
+
+    FunctionRange selectById(FunctionRange functionRange);
+
+    void insert(FunctionRange functionRange);
+
+    void delete(FunctionRange functionRange);
+
+    void update(FunctionRange functionRange);
 }
