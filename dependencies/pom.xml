@@ -20,6 +20,8 @@
         <pagehelper.version>1.2.12</pagehelper.version>
 
         <javax-persistence.version>1.0</javax-persistence.version>
+
+        <commons-lang3.version>3.8</commons-lang3.version>
     </properties>
 
     <dependencyManagement>
@@ -110,7 +112,15 @@
                 <scope>compile</scope>
                 <version>${javax-persistence.version}</version>
             </dependency>
+
+            <!--commons-lang-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <licenses>
