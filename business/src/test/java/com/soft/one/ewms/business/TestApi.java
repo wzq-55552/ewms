@@ -19,6 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -118,5 +120,12 @@ public class TestApi {
         if (operationRange != null)
             System.out.println(operationRange.getRoidId() + operationRange.getAccNo());
 
+    }
+
+    @Test
+    public void testdate(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
+        String str = simpleDateFormat.format(new Date());
+        System.out.println(str);
     }
 }

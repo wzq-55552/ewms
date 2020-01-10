@@ -7,10 +7,10 @@ import com.soft.one.ewms.commons.utils.OkHttpClientUtil;
 import com.soft.one.ewms.domain.*;
 import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,7 +40,6 @@ public class PermissionController {
      */
     @GetMapping("/get/acc/nos")
     public ResponseResult<List<LmsWarehouseAcc>>getAccNo(){
-        System.out.println("111");
         //获取json,先启动api模块，不然没有数据
         ResponseResult<List<LmsWarehouseAcc>> result = new ResponseResult<>();
         Response response  = OkHttpClientUtil.getInstance().getData("http://localhost:8082/api/acc/all");
