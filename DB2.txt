@@ -62,7 +62,7 @@ User_id nvarchar(20) NOT NULL COMMENT '用户ID',
 Equipment nvarchar(20) NOT NULL COMMENT '电脑/手机的MAC地址',
 In_date datetime NOT NULL COMMENT '登入时间，yyyy-mm-dd hh:mm',
 Out_date datetime  COMMENT '登出时间，yyyy-mm-dd hh:mm',
-Out_type tinyint  COMMENT '登出触发者，0：用户；1：系统',
+Out_type int  COMMENT '登出触发者，0：用户；1：系统',
 PRIMARY KEY(First_id),
 CONSTRAINT `fk_log_in_user_information` FOREIGN KEY (User_id) REFERENCES `user_information` (User_id)
 ) COMMENT '登陆log档';
