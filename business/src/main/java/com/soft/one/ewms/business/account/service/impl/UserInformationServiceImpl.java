@@ -40,8 +40,8 @@ public class UserInformationServiceImpl implements UserInformationService{
     }
 
     @Override
-    public void setuserinfo(UserInformation userInformation) {
-        userInformationMapper.setuserinfo(userInformation);
+    public void setuserinfo(String userid, String username, String userPsw) {
+        userInformationMapper.setuserinfo(userid,username,userPsw);
     }
 
 

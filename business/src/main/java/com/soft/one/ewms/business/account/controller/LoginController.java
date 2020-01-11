@@ -70,10 +70,10 @@ public class LoginController {
             controlIn.setUserId("userid");
             controlInService.insertuserid(controlIn);
 
-            login.setUserId("userid");
+            login.setUserId((String) httpServletRequest.getSession().getAttribute("userid"));
             login.setEquipment(GetMacAddress.getOnly());
             login.setInDate(new Date());
-            logInService.insertlogininformation(login);
+            logInService.insertloginformation(login);
 
             return "redirect:/main";
         }
@@ -93,6 +93,15 @@ public class LoginController {
             }
         }
         return false;
+    }
+
+    /**
+     * 反馈登录状态给前端
+     * @param userid
+     */
+    @RequestMapping(value = "returnlogstatus",method = RequestMethod.POST)
+    public void returnlogstatus(String userid){
+        JudgeLogin(userid);
     }
 
 }

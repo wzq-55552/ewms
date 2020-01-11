@@ -16,7 +16,24 @@ public class LogInServiceImpl implements LogInService{
 
 
     @Override
-    public void insertlogininformation(LogIn login) {
+    public void insertloginformation(LogIn login) {
         logInMapper.insert(login);
+    }
+
+
+
+    @Override
+    public LogIn selectByUserid(String userid) {
+        return logInMapper.selectByPrimaryKey(userid);
+    }
+
+    @Override
+    public void deleteLoginfo(String userid) {
+        logInMapper.deleteByPrimaryKey(userid);
+    }
+
+    @Override
+    public void updateloginfo(LogIn login) {
+        logInMapper.updateloginfo(login);
     }
 }

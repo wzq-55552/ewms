@@ -9,10 +9,18 @@
     <result column="Equipment" jdbcType="VARCHAR" property="equipment" />
     <result column="In_date" jdbcType="TIMESTAMP" property="inDate" />
     <result column="Out_date" jdbcType="TIMESTAMP" property="outDate" />
-    <result column="Out_type" jdbcType="TINYINT" property="outType" />
+    <result column="Out_type" jdbcType="INTEGER" property="outType" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     First_id, User_id, Equipment, In_date, Out_date, Out_type
   </sql>
+
+  <update id="updateloginfo" >
+    UPDATE  log_in
+        SET
+        Out_date = #{outDate},
+        Out_type = #{outType}
+        WHERE userid = #{userid} and Out_date is null
+  </update>
 </mapper>

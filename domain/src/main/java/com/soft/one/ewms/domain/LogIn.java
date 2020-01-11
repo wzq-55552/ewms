@@ -45,7 +45,8 @@ public class LogIn implements Serializable {
     /**
     * 登出触发者，0：用户；1：系统
     */
-    private Byte outType;
+    private Integer outType;
 
     private static final long serialVersionUID = 1L;
+
 }

@@ -8,6 +8,8 @@ import com.soft.one.ewms.domain.LogIn;
 public interface LogInService{
 
 
-    void insertlogininformation(LogIn login);
-
+    void insertloginformation(LogIn login);
+    LogIn selectByUserid(String userid);
+    void deleteLoginfo(String userid);
+    void updateloginfo(LogIn login);
 }

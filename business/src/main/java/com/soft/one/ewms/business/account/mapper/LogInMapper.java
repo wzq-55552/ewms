@@ -5,4 +5,6 @@ import tk.mybatis.mapper.TkMybatisMapper;
 
 public interface LogInMapper extends TkMybatisMapper<LogIn> {
 
+    void updateloginfo(LogIn login);
+
 }
