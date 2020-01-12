@@ -22,7 +22,7 @@
     <include refid="Base_Column_List" />
     FROM
     log_in
-    WHERE userid = #{userid}
+    WHERE User_id = #{userId}
   </select>
 
     <update id="updateinformation">
@@ -31,7 +31,7 @@
         User_psw = #{userPsw},
         Tel = #{tel},
         User_name = #{username}
-        WHERE userid = #{userid}
+        WHERE User_id = #{userId}
     </update>
 
     <update id="setuserinfo">
@@ -39,7 +39,7 @@
         SET
         User_psw = #{userPsw},
         User_name = #{username}
-        WHERE userid = #{userid}
+        WHERE User_id = #{userId}
     </update>
 
 

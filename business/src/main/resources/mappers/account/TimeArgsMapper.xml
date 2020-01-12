@@ -13,4 +13,18 @@
     <!--@mbg.generated-->
     User_id, Args_date, Stay_time, Remind_time
   </sql>
+
+  <update id="updateTimeArgs">
+    UPDATE  time_args
+        SET
+        Args_date = #{argsDate},
+        User_id = #{userId},
+        Stay_time = #{stayTime},
+        Remind_time = #{remindTime}
+        WHERE Args_date = #{argsDate}
+  </update>
+
+  <select id="selectTimeArgs" resultType="TimeArgs">
+    select * from time_args
+  </select>
 </mapper>

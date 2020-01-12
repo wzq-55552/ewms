@@ -21,6 +21,6 @@
         SET
         Out_date = #{outDate},
         Out_type = #{outType}
-        WHERE userid = #{userid} and Out_date is null
+        WHERE User_id = #{userId} and Out_date is null
   </update>
 </mapper>

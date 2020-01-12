@@ -4,4 +4,7 @@ import com.soft.one.ewms.domain.TimeArgs;
 import tk.mybatis.mapper.TkMybatisMapper;
 
 public interface TimeArgsMapper extends TkMybatisMapper<TimeArgs> {
+
+    void updateTimeArgs(TimeArgs timeArgs);
+    TimeArgs selectTimeArgs();
 }
