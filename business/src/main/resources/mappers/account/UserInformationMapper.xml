@@ -34,7 +34,8 @@
       UPDATE  user_information
         SET
         User_psw = #{User_psw},
-        User_name = #{User_name}
+        User_name = #{User_name},
+        Tel = #{Tel}
         WHERE User_id = #{User_id}
     </update>
 

@@ -76,7 +76,7 @@ public class LoginController {
             login.setEquipment(GetMacAddress.getOnly());
             login.setIn_date(new Date());
             logInService.insertloginformation(login);
-            System.out.println("----------------------------------------------");
+//            System.out.println("----------------------------------------------");
             return "redirect:/main";
         }
     }

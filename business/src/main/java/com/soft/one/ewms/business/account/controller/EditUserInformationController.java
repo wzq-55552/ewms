@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  *@Version 1.0
  */
 @Controller
+@RequestMapping(value = "editinfo")
 public class EditUserInformationController {
 
     @Autowired
@@ -29,9 +30,10 @@ public class EditUserInformationController {
 //    }
 
     @RequestMapping(value = "editinformation",method = RequestMethod.POST)
-    public String editinformation(String userid,String username,String userPsw, HttpServletRequest httpServletRequest){
+    public String editinformation(String userid,String username,String userPsw,String Tel, HttpServletRequest httpServletRequest){
         UserInformation userInformation = userInformationService.selectByUserid(userid);
         System.out.println(userInformation);
+        userInformation.setTel(Tel);
         userInformation.setUser_name(username);
         userInformation.setUser_psw(userPsw);
         userInformationService.updateinformation(userInformation);

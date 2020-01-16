@@ -25,7 +25,7 @@ public class LogoutController {
     @RequestMapping(value = "logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest httpServletRequest){
         LogIn login = logInService.selectByUserid((String) httpServletRequest.getSession().getAttribute("userid"));
-        System.out.println(login);
+//        System.out.println(login);
         //删除登录控制档中的userid
         logInService.deleteLoginfo(login.getUser_id());
         //设置登出触发者和登出时间
