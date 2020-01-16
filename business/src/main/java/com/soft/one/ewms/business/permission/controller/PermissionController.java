@@ -255,7 +255,7 @@ public class PermissionController {
      * 获取所有的功能菜单
      */
     @GetMapping("/get/function/menus")
-    public ResponseResult<FunctionMenu> getFunctionMenu(){
+    public ResponseResult<List<FunctionMenu>> getFunctionMenu() {
         ResponseResult result = new ResponseResult();
         List<FunctionMenu> functionMenus = functionMenuService.selectAll();
         result.setCode(ResponseResult.CodeStatus.OK);
@@ -431,7 +431,7 @@ public class PermissionController {
     /**
      * 根据功能角色Id获取其拥有权限的功能列表
      * @param functionRange
-     * @return ResponseResult<List   <   String>>
+     * @return ResponseResult<List < String>>
      */
     @GetMapping("/get/function/range")
     public ResponseResult<List<String>> getFunctionRange(FunctionRange functionRange){
@@ -482,7 +482,6 @@ public class PermissionController {
 
     /**
      * 删除功能角色的功能
-     *
      * @param functionRange
      * @return
      */
@@ -502,6 +501,7 @@ public class PermissionController {
     }
 
 
+    //不可用
     /**
      * 修改功能角色的功能
      *
