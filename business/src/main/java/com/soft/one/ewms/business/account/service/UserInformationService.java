@@ -6,9 +6,9 @@ import com.soft.one.ewms.domain.UserInformation;
 
 public interface UserInformationService{
 
-    UserInformation selectByPrimaryKey(String userid);
     UserInformation login(String userId, String userPsw);
     void updateinformation(UserInformation userInformation);
     void setuserinfo(String userid,String username,String userPsw);
+    UserInformation selectByUserid(String userid);
 
 }

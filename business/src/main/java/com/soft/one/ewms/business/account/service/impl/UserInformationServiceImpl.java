@@ -17,20 +17,20 @@ public class UserInformationServiceImpl implements UserInformationService{
     @Resource
     private UserInformationMapper userInformationMapper;
 
-    @Override
-    public UserInformation selectByPrimaryKey(String userid) {
-        //通过userid查找Userinformation
-        return userInformationMapper.selectByPrimaryKey(userid);
-    }
 
     @Override
     public UserInformation login(String userId, String userPsw) {
-        UserInformation userInformation = userInformationMapper.selectByPrimaryKey(userId);
-        //判断输入的密码是否与数据库中的密码一致
-        if(userPsw.equals(userInformation.getUserPsw()))
+        UserInformation userInformation = userInformationMapper.selectByUserid(userId);
+        System.out.println(userInformation);
+        if(userInformation != null)
         {
-            return userInformation;
+            //判断输入的密码是否与数据库中的密码一致
+            if(userPsw.equals(userInformation.getUser_psw()))
+            {
+                return userInformation;
+            }
         }
+
         return null;
     }
 
@@ -42,6 +42,11 @@ public class UserInformationServiceImpl implements UserInformationService{
     @Override
     public void setuserinfo(String userid, String username, String userPsw) {
         userInformationMapper.setuserinfo(userid,username,userPsw);
+    }
+
+    @Override
+    public UserInformation selectByUserid(String userid) {
+        return userInformationMapper.selectByUserid(userid);
     }
 
 

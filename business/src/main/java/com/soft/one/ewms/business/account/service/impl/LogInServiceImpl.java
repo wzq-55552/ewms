@@ -24,12 +24,12 @@ public class LogInServiceImpl implements LogInService{
 
     @Override
     public LogIn selectByUserid(String userid) {
-        return logInMapper.selectByPrimaryKey(userid);
+        return logInMapper.selectByuserid(userid);
     }
 
     @Override
     public void deleteLoginfo(String userid) {
-        logInMapper.deleteByPrimaryKey(userid);
+        logInMapper.deleteLoginfo(userid);
     }
 
     @Override

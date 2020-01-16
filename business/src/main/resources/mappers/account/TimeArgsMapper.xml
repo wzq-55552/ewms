@@ -17,11 +17,11 @@
   <update id="updateTimeArgs">
     UPDATE  time_args
         SET
-        Args_date = #{argsDate},
-        User_id = #{userId},
-        Stay_time = #{stayTime},
-        Remind_time = #{remindTime}
-        WHERE Args_date = #{argsDate}
+        Args_date = #{Args_date},
+        User_id = #{User_id},
+        Stay_time = #{Stay_time},
+        Remind_time = #{Remind_time}
+        WHERE Args_date = #{Args_date}
   </update>
 
   <select id="selectTimeArgs" resultType="TimeArgs">

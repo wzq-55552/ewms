@@ -20,37 +20,37 @@ public class UserInformation implements Serializable {
     /**
     * 用户ID,至少6个字符
     */
-    private String userId;
+    private String User_id;
 
     /**
     * 用户密码,至少為八個字符. 需由大寫英文, 小寫英文, 數字及符號4項中的其中3項組成
     */
-    private String userPsw;
+    private String User_psw;
 
     /**
     * 用户姓名
     */
-    private String userName;
+    private String User_name;
 
     /**
     * 用户手机，11位
     */
-    private String tel;
+    private String Tel;
 
     /**
     * 功能角色ID
     */
-    private String frId;
+    private String Fr_Id;
 
     /**
     * 操作资料角色ID
     */
-    private String roidId;
+    private String Roid_Id;
 
     /**
     * 密码更改日期与时间，yyyy-mm-dd hh:mm
     */
-    private Date pswDate;
+    private Date Psw_date;
 
     private static final long serialVersionUID = 1L;
 }

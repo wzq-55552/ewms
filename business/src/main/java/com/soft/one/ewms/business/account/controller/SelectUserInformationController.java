@@ -23,7 +23,7 @@ public class SelectUserInformationController {
      */
     @RequestMapping(value = "selectuserinfo",method = RequestMethod.POST)
     public UserInformation selectuserinfo(String userid){
-        return userInformationService.selectByPrimaryKey(userid);
+        return userInformationService.selectByUserid(userid);
     }
 
 

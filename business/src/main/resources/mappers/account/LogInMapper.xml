@@ -19,8 +19,20 @@
   <update id="updateloginfo" >
     UPDATE  log_in
         SET
-        Out_date = #{outDate},
-        Out_type = #{outType}
-        WHERE User_id = #{userId} and Out_date is null
+        Out_date = #{Out_date},
+        Out_type = #{Out_type}
+        WHERE User_id = #{User_id} and Out_date is null
   </update>
+    
+    <delete id="deleteLoginfo">
+        delete
+        from control_in
+        where User_id = #{userid}
+    </delete>
+
+    <select id="selectByuserid" resultType="LogIn">
+        select *
+        from log_in
+        where User_id = #{userid} and Out_date is null
+    </select>
 </mapper>

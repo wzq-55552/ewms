@@ -8,6 +8,7 @@ import com.soft.one.ewms.domain.ControlIn;
 import com.soft.one.ewms.domain.LogIn;
 import com.soft.one.ewms.domain.UserInformation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +25,7 @@ import java.util.List;
  * @Version 1.0
  */
 
-@RestController
+@Controller
 public class LoginController {
 
     @Autowired
@@ -36,13 +37,14 @@ public class LoginController {
     @Autowired
     private LogInService logInService;
 
-    @RequestMapping(value = "login",method = RequestMethod.GET)
+    @RequestMapping(value = {"","login"},method = RequestMethod.GET)
     public String Login(){
         return "login";
     }
 
     @RequestMapping(value = "login",method = RequestMethod.POST)
     public String Login(String userId, String userPsw, Model model, HttpServletRequest httpServletRequest){
+        System.out.println(userId+" "+userPsw);
         UserInformation userInformation = userInformationService.login(userId,userPsw);
         ControlIn controlIn = new ControlIn();
         LogIn login = new LogIn();
@@ -60,21 +62,21 @@ public class LoginController {
         else{
             //将登陆信息放入会话
             httpServletRequest.getSession().setAttribute("user",userInformation);
-            httpServletRequest.getSession().setAttribute("userid",userInformation.getUserId());
-            httpServletRequest.getSession().setAttribute("equipment",userInformation.getUserPsw());
-            httpServletRequest.getSession().setAttribute("username",userInformation.getUserName());
+            httpServletRequest.getSession().setAttribute("userid",userInformation.getUser_id());
+            httpServletRequest.getSession().setAttribute("equipment",userInformation.getUser_psw());
+            httpServletRequest.getSession().setAttribute("username",userInformation.getUser_name());
             httpServletRequest.getSession().setAttribute("telephone",userInformation.getTel());
-            httpServletRequest.getSession().setAttribute("frid",userInformation.getFrId());
-            httpServletRequest.getSession().setAttribute("roidld",userInformation.getRoidId());
-            httpServletRequest.getSession().setAttribute("pswdate",userInformation.getPswDate());
-            controlIn.setUserId("userid");
+            httpServletRequest.getSession().setAttribute("frid",userInformation.getFr_Id());
+            httpServletRequest.getSession().setAttribute("roidld",userInformation.getRoid_Id());
+            httpServletRequest.getSession().setAttribute("pswdate",userInformation.getPsw_date());
+            controlIn.setUserId(userInformation.getUser_id());
             controlInService.insertuserid(controlIn);
 
-            login.setUserId((String) httpServletRequest.getSession().getAttribute("userid"));
+            login.setUser_id((String) httpServletRequest.getSession().getAttribute("userid"));
             login.setEquipment(GetMacAddress.getOnly());
-            login.setInDate(new Date());
+            login.setIn_date(new Date());
             logInService.insertloginformation(login);
-
+            System.out.println("----------------------------------------------");
             return "redirect:/main";
         }
     }
@@ -104,6 +106,10 @@ public class LoginController {
         JudgeLogin(userid);
     }
 
+    @RequestMapping(value ="main",method = RequestMethod.GET)
+    public String Main(){
+        return "Main";
+    }
 
 
 }

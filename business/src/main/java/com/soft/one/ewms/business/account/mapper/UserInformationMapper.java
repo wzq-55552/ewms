@@ -7,4 +7,5 @@ public interface UserInformationMapper extends TkMybatisMapper<UserInformation> 
 
     void updateinformation(UserInformation userInformation);
     void setuserinfo(String userid,String username,String userPsw);
+    UserInformation selectByUserid(String userid);
 }

@@ -17,21 +17,25 @@
     User_id, User_psw, User_name, Tel, Fr_id, Roid_id, Psw_date
   </sql>
 
-  <select id="selectByPrimaryKey" resultType="UserInformation">
-    SELECT
-    <include refid="Base_Column_List" />
-    FROM
-    log_in
-    WHERE User_id = #{userId}
+<!--  <select id="selectByUserid" resultType="UserInformation">-->
+<!--    SELECT-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    FROM-->
+<!--    user_information-->
+<!--    WHERE a.User_id = #{userId}-->
+<!--  </select>-->
+  <select id="selectByUserid" resultType="UserInformation">
+    select *
+     from user_information
+     where User_id = #{userid}
   </select>
 
     <update id="updateinformation">
       UPDATE  user_information
         SET
-        User_psw = #{userPsw},
-        Tel = #{tel},
-        User_name = #{username}
-        WHERE User_id = #{userId}
+        User_psw = #{User_psw},
+        User_name = #{User_name}
+        WHERE User_id = #{User_id}
     </update>
 
     <update id="setuserinfo">
@@ -39,7 +43,7 @@
         SET
         User_psw = #{userPsw},
         User_name = #{username}
-        WHERE User_id = #{userId}
+        WHERE User_id = #{userid}
     </update>
 
 

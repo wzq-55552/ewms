@@ -26,10 +26,10 @@ public class SetTimeArgController {
     @RequestMapping(value = "settimearg",method = RequestMethod.POST)
     public void settimearg(Integer stayTime, Integer remindTime, HttpServletRequest httpServletRequest){
         TimeArgs timeArgs = new TimeArgs();
-        timeArgs.setUserId((String) httpServletRequest.getSession().getAttribute("userid"));
-        timeArgs.setArgsDate(new Date());
-        timeArgs.setStayTime(stayTime);
-        timeArgs.setRemindTime(remindTime);
+        timeArgs.setUser_id((String) httpServletRequest.getSession().getAttribute("userid"));
+        timeArgs.setArgs_date(new Date());
+        timeArgs.setStay_time(stayTime);
+        timeArgs.setRemind_time(remindTime);
         timeArgsService.updateTimeArgs(timeArgs);
     }
 

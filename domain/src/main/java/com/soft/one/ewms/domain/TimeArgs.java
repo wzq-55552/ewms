@@ -20,22 +20,22 @@ public class TimeArgs implements Serializable {
     /**
     * 用户ID,记录修改参数的管理员
     */
-    private String userId;
+    private String User_id;
 
     /**
     * 记录修改参数的时间，yyyy-mm-dd hh:mm
     */
-    private Date argsDate;
+    private Date Args_date;
 
     /**
     * 画面停留时间，以分为单位
     */
-    private Integer stayTime;
+    private Integer Stay_time;
 
     /**
     * 定期修改密码提醒时间，以天为单位
     */
-    private Integer remindTime;
+    private Integer Remind_time;
 
     private static final long serialVersionUID = 1L;
 }

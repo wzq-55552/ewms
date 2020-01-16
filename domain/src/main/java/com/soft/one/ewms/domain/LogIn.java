@@ -20,32 +20,32 @@ public class LogIn implements Serializable {
     /**
     * 自增序号
     */
-    private Long firstId;
+    private Long First_id;
 
     /**
     * 用户ID
     */
-    private String userId;
+    private String User_id;
 
     /**
     * 电脑/手机的MAC地址
     */
-    private String equipment;
+    private String Equipment;
 
     /**
     * 登入时间，yyyy-mm-dd hh:mm
     */
-    private Date inDate;
+    private Date In_date;
 
     /**
     * 登出时间，yyyy-mm-dd hh:mm
     */
-    private Date outDate;
+    private Date Out_date;
 
     /**
     * 登出触发者，0：用户；1：系统
     */
-    private Integer outType;
+    private Integer Out_type;
 
     private static final long serialVersionUID = 1L;
 
