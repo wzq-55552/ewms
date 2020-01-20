@@ -76,7 +76,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/add/operation/role")
-    public ResponseResult<OperationRole>addOperationRole(OperationRole operationRole){
+    public ResponseResult<OperationRole> addOperationRole(@RequestBody OperationRole operationRole) {
         ResponseResult<OperationRole> result = new ResponseResult<>();
         if(StringUtils.isEmpty(operationRole.getRoidId())){
             result.setCode(ResponseResult.CodeStatus.FAIL);
@@ -101,7 +101,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/update/operation/role")
-    public ResponseResult<OperationRole>updateOperationRole(OperationRole operationRole){
+    public ResponseResult<OperationRole> updateOperationRole(@RequestBody OperationRole operationRole) {
         ResponseResult<OperationRole> result = new ResponseResult<>();
         //如果传进的id不存在，不能修改
         if(operationRoleService.selectById(operationRole)==null){
@@ -122,7 +122,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/delete/operation/role")
-    public ResponseResult<OperationRole>deleteOperationRole(OperationRole operationRole){
+    public ResponseResult<OperationRole> deleteOperationRole(@RequestBody OperationRole operationRole) {
         ResponseResult<OperationRole> result = new ResponseResult<>();
         //如果传进的id不存在，不能删除
         if(operationRoleService.selectById(operationRole)==null){
@@ -143,7 +143,7 @@ public class PermissionController {
      * @return
      */
     @GetMapping("/get/operation/range")
-    public ResponseResult<List<String>> getOperationRange(OperationRange operationRange) {
+    public ResponseResult<List<String>> getOperationRange(@RequestBody OperationRange operationRange) {
         ResponseResult<List<String>>result = new ResponseResult<>();
         if(operationRange.getRoidId()==null){
             result.setCode(ResponseResult.CodeStatus.FAIL);
@@ -166,7 +166,7 @@ public class PermissionController {
 
     //暂时不可用
     @PostMapping("/update/operation/range")
-    public ResponseResult<OperationRange> updateOperationRange(OperationRange source, OperationRange target) {
+    public ResponseResult<OperationRange> updateOperationRange(@RequestBody OperationRange source, OperationRange target) {
         ResponseResult<OperationRange> result = new ResponseResult<>();
         //数据库中没有找到，不能更新
         if (operationRangeService.selectById(source) == null) {
@@ -190,7 +190,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/add/operation/range")
-    public ResponseResult<OperationRange> addOperationRange(OperationRange operationRange) {
+    public ResponseResult<OperationRange> addOperationRange(@RequestBody OperationRange operationRange) {
         ResponseResult<OperationRange> result = new ResponseResult<>();
         Response response = OkHttpClientUtil.getInstance().getData("http://localhost:8081/api/acc/all");
         List<LmsWarehouseAcc> jsonList = null;
@@ -237,7 +237,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/delete/operation/range")
-    public ResponseResult<OperationRange> deleteOperationRange(OperationRange operationRange) {
+    public ResponseResult<OperationRange> deleteOperationRange(@RequestBody OperationRange operationRange) {
         ResponseResult<OperationRange> result = new ResponseResult<>();
         if (operationRangeService.selectById(operationRange) == null) {
             result.setCode(ResponseResult.CodeStatus.FAIL);
@@ -270,7 +270,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/update/function/menu")
-    public ResponseResult<FunctionMenu>updateFunctionMenu(FunctionMenu functionMenu){
+    public ResponseResult<FunctionMenu> updateFunctionMenu(@RequestBody FunctionMenu functionMenu) {
         ResponseResult<FunctionMenu> result = new ResponseResult<>();
         FunctionMenu temp = functionMenuService.selectById(functionMenu);
         if(temp==null){
@@ -291,7 +291,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/add/function/menu")
-    public ResponseResult<FunctionMenu>addFunctionMenu(FunctionMenu functionMenu){
+    public ResponseResult<FunctionMenu> addFunctionMenu(@RequestBody FunctionMenu functionMenu) {
         ResponseResult<FunctionMenu> result = new ResponseResult<>();
         //传入的功能菜单id为空串，不合法
         if(StringUtils.isEmpty(functionMenu.getFId())){
@@ -317,7 +317,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/delete/function/menu")
-    public ResponseResult<FunctionMenu> deleteFunctionMenu(FunctionMenu functionMenu) {
+    public ResponseResult<FunctionMenu> deleteFunctionMenu(@RequestBody FunctionMenu functionMenu) {
         ResponseResult<FunctionMenu> result = new ResponseResult<>();
 
 
@@ -360,7 +360,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/add/function/role")
-    public ResponseResult<FunctionRole>addFunctionRole(FunctionRole functionRole){
+    public ResponseResult<FunctionRole> addFunctionRole(@RequestBody FunctionRole functionRole) {
         ResponseResult<FunctionRole> result = new ResponseResult<>();
         //传入的功能角色id为空串，不合法
         if(StringUtils.isEmpty(functionRole.getFrId())){
@@ -386,7 +386,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/update/function/role")
-    public ResponseResult<FunctionRole>updateFunctionRole(FunctionRole functionRole){
+    public ResponseResult<FunctionRole> updateFunctionRole(@RequestBody FunctionRole functionRole) {
         ResponseResult<FunctionRole> result = new ResponseResult<>();
         if(functionRoleService.selectById(functionRole)==null){
             result.setCode(ResponseResult.CodeStatus.FAIL);
@@ -406,7 +406,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/delete/function/role")
-    public ResponseResult<FunctionRole>deleteFunctionRole(FunctionRole functionRole){
+    public ResponseResult<FunctionRole> deleteFunctionRole(@RequestBody FunctionRole functionRole) {
         ResponseResult<FunctionRole>result = new ResponseResult<>();
 
         if (functionRoleService.selectById(functionRole) == null) {
@@ -434,7 +434,7 @@ public class PermissionController {
      * @return ResponseResult<List < String>>
      */
     @GetMapping("/get/function/range")
-    public ResponseResult<List<String>> getFunctionRange(FunctionRange functionRange){
+    public ResponseResult<List<String>> getFunctionRange(@RequestBody FunctionRange functionRange) {
         ResponseResult result = new ResponseResult();
         String frId = functionRange.getFrId();
         //如果传进来的功能角色Id为空,不合法
@@ -457,7 +457,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/add/function/range")
-    public ResponseResult<FunctionRange> addFunctionRange(FunctionRange functionRange) {
+    public ResponseResult<FunctionRange> addFunctionRange(@RequestBody FunctionRange functionRange) {
         ResponseResult<FunctionRange> result = new ResponseResult<>();
         if (functionRoleService.selectById(new FunctionRole(functionRange.getFrId(), null)) == null) {
             result.setCode(ResponseResult.CodeStatus.FAIL);
@@ -486,7 +486,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/delete/function/range")
-    public ResponseResult<FunctionRange> deleteFunctionRange(FunctionRange functionRange) {
+    public ResponseResult<FunctionRange> deleteFunctionRange(@RequestBody FunctionRange functionRange) {
         ResponseResult<FunctionRange> result = new ResponseResult<>();
         if (functionRangeService.selectById(functionRange) == null) {
             result.setCode(ResponseResult.CodeStatus.FAIL);
@@ -509,7 +509,7 @@ public class PermissionController {
      * @return
      */
     @PostMapping("/update/function/range")
-    public ResponseResult<FunctionRange> updateFunctionRange(FunctionRange functionRange) {
+    public ResponseResult<FunctionRange> updateFunctionRange(@RequestBody FunctionRange functionRange) {
         ResponseResult<FunctionRange> result = new ResponseResult<>();
         if (functionRangeService.selectById(functionRange) == null) {
             result.setCode(ResponseResult.CodeStatus.FAIL);
