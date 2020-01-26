@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>business</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <licenses>
         <license>
@@ -67,7 +67,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
         </dependency>
 
         <!--tkmybatis-->
