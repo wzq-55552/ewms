@@ -11,47 +11,22 @@
     <properties>
         <!-- okhttp3 -->
         <okhttp3.version>4.1.0</okhttp3.version>
+        <!-- jackson -->
         <jackson-databind.version>2.9.8</jackson-databind.version>
-
-        <!--tkmybatis-->
+        <!-- tkmybatis -->
         <spring-boot-mapper.version>2.1.5</spring-boot-mapper.version>
-
-        <!--pagehelper分页-->
-        <pagehelper.version>1.2.12</pagehelper.version>
-
+        <!-- javax -->
         <javax-persistence.version>1.0</javax-persistence.version>
-
+        <!-- commons-langs工具包 -->
         <commons-lang3.version>3.8</commons-lang3.version>
+        <!-- Spring Cloud -->
+        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+        <!-- fastjson -->
+        <fastjson.version>1.2.51</fastjson.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>net.sourceforge.nekohtml</groupId>
-                <artifactId>nekohtml</artifactId>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-            </dependency>
-
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <optional>true</optional>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <scope>test</scope>
-            </dependency>
-
             <!--HikariCP-->
             <dependency>
                 <groupId>com.zaxxer</groupId>
@@ -68,12 +43,6 @@
                         <artifactId>tomcat-jdbc</artifactId>
                     </exclusion>
                 </exclusions>
-            </dependency>
-            <!--MySQL-->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
             </dependency>
 
             <!--tkmybatis-->
@@ -98,13 +67,6 @@
                 <version>${jackson-databind.version}</version>
             </dependency>
 
-            <!--pagehelper分页-->
-            <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pagehelper.version}</version>
-            </dependency>
-
             <!--Servlet Begin-->
             <dependency>
                 <groupId>javax.persistence</groupId>
@@ -119,54 +81,25 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
+
+            <!-- Spring Cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--fastjson-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
 
-    <licenses>
-        <license>
-            <name>Apache 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
 
-    <repositories>
-        <repository>
-            <id>spring-milestone</id>
-            <name>Spring Milestone</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <repository>
-            <id>spring-snapshot</id>
-            <name>Spring Snapshot</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-milestone</id>
-            <name>Spring Milestone</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-
-        <pluginRepository>
-            <id>spring-snapshot</id>
-            <name>Spring Snapshot</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 </project>

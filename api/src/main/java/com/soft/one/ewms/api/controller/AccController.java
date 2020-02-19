@@ -1,7 +1,7 @@
 package com.soft.one.ewms.api.controller;
 
 import com.soft.one.ewms.commons.dto.ResponseResult;
-import com.soft.one.ewms.domain.LmsWarehouseAcc;
+import com.soft.one.ewms.domain.pojos.api.LmsWarehouseAcc;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Title：暴露数据api
- * Description：现阶段只有一个api,仓库号和仓库类型，有1000个左右，测试用的，端口号8081，先启动
+ * Description：现阶段只有一个api,仓库号和仓库类型，有1000个左右，测试用的，端口号8090，先启动
  * @author WZQ
  * @version 1.0.0
  * @date 2020/1/8
@@ -51,6 +51,6 @@ public class AccController {
             }
         }
 
-        return new ResponseResult<List>(0,"成功",lmsWarehouseAccList);
+        return new ResponseResult<List>(ResponseResult.CodeStatus.OK,"成功",lmsWarehouseAccList);
     }
 }

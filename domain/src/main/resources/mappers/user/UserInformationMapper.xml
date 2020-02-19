@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft.one.ewms.domain.mappers.user.UserInformationMapper">
+  <resultMap id="BaseResultMap" type="com.soft.one.ewms.domain.pojos.user.UserInformation">
+    <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
+    <!--@Table user_information-->
+    <id column="User_id" jdbcType="VARCHAR" property="userId" />
+    <result column="User_psw" jdbcType="VARCHAR" property="userPsw" />
+    <result column="User_name" jdbcType="VARCHAR" property="userName" />
+    <result column="Tel" jdbcType="VARCHAR" property="tel" />
+    <result column="Fr_id" jdbcType="VARCHAR" property="frId" />
+    <result column="Roid_id" jdbcType="VARCHAR" property="roidId" />
+    <result column="Psw_date" jdbcType="TIMESTAMP" property="pswDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
+    User_id, User_psw, User_name, Tel, Fr_id, Roid_id, Psw_date
+  </sql>
+</mapper>

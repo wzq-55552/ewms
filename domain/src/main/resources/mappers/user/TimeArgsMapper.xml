@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft.one.ewms.domain.mappers.user.TimeArgsMapper">
+  <resultMap id="BaseResultMap" type="com.soft.one.ewms.domain.pojos.user.TimeArgs">
+    <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
+    <!--@Table time_args-->
+    <id column="User_id" jdbcType="VARCHAR" property="userId" />
+    <id column="Args_date" jdbcType="TIMESTAMP" property="argsDate" />
+    <result column="Stay_time" jdbcType="INTEGER" property="stayTime" />
+    <result column="Remind_time" jdbcType="INTEGER" property="remindTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
+    User_id, Args_date, Stay_time, Remind_time
+  </sql>
+</mapper>
