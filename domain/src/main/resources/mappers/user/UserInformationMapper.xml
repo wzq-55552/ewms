@@ -16,4 +16,21 @@
     <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
     User_id, User_psw, User_name, Tel, Fr_id, Roid_id, Psw_date
   </sql>
+
+  <select id="selectByDto" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_information
+    <where>
+      <if test="userRoleDto.userId != null and userRoleDto.userId != ''">
+        User_id like CONCAT ('%',#{userRoleDto.userId},'%')
+      </if>
+      <if test="userRoleDto.frId != null and userRoleDto.frId != ''">
+        and Fr_id like CONCAT ('%',#{userRoleDto.frId},'%')
+      </if>
+      <if test="userRoleDto.roidId != null and userRoleDto.roidId != ''">
+        and Roid_id like CONCAT ('%',#{userRoleDto.roidId},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

@@ -1,10 +1,13 @@
 package com.soft.one.ewms.business.user.service.impl;
 
+import com.soft.one.ewms.domain.dtos.user.UserRoleDto;
 import com.soft.one.ewms.domain.pojos.user.UserInformation;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.soft.one.ewms.domain.mappers.user.UserInformationMapper;
 import com.soft.one.ewms.business.user.service.UserInformationService;
+
+import java.util.List;
 
 @Service
 public class UserInformationServiceImpl implements UserInformationService{
@@ -30,6 +33,19 @@ public class UserInformationServiceImpl implements UserInformationService{
     @Override
     public int deleteByPrimaryKey(String userId) {
         return userInformationMapper.deleteByPrimaryKey(userId);
+    }
+
+    @Override
+    public List<UserInformation> selectAll() {
+        return userInformationMapper.selectAll();
+    }
+
+    @Override
+    public  List<UserInformation> selectByDto(UserRoleDto userRoleDto) {
+        if (userRoleDto != null){
+            return userInformationMapper.selectByDto(userRoleDto);
+        }
+        return null;
     }
 
 

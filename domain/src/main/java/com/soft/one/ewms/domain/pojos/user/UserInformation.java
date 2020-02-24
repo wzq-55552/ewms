@@ -3,6 +3,8 @@ package com.soft.one.ewms.domain.pojos.user;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +24,7 @@ public class UserInformation implements Serializable {
     /**
      * 用户密码,至少為八個字符. 需由大寫英文, 小寫英文, 數字及符號4項中的其中3項組成
      */
+    @JsonIgnore // json传输忽略
     @Column(name = "User_psw")
     private String userPsw;
 
@@ -55,5 +58,5 @@ public class UserInformation implements Serializable {
     @Column(name = "Psw_date")
     private Date pswDate;
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -1237811357730034219L;
 }

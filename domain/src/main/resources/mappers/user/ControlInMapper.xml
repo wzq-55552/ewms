@@ -4,6 +4,13 @@
   <resultMap id="BaseResultMap" type="com.soft.one.ewms.domain.pojos.user.ControlIn">
     <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
     <!--@Table control_in-->
+    <id column="Id" jdbcType="BIGINT" property="id" />
     <result column="User_id" jdbcType="VARCHAR" property="userId" />
+    <result column="Equipment" jdbcType="VARCHAR" property="equipment" />
   </resultMap>
+
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
+     id, User_id, Equipment
+  </sql>
 </mapper>

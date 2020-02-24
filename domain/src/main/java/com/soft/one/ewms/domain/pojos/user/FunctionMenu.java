@@ -36,5 +36,5 @@ public class FunctionMenu implements Serializable {
     @Column(name = "F_name")
     private String fName;
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -6001080466893842579L;
 }

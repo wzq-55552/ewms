@@ -23,5 +23,5 @@ public class FunctionRange implements Serializable {
     @Column(name = "F_id")
     private String fId;
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 330740760169629087L;
 }

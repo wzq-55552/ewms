@@ -14,6 +14,8 @@ import java.io.Serializable;
 @Data
 public class ResponseResult<T> implements Serializable {
 
+    private static final long serialVersionUID = -2936348324647564414L;
+
     /**
      * 状态码
      */

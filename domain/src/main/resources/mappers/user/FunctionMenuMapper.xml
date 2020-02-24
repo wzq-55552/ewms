@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.soft.one.ewms.domain.mappers.user.FunctionMenuMapper">
   <resultMap id="BaseResultMap" type="com.soft.one.ewms.domain.pojos.user.FunctionMenu">
-    <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
+    <!--@mbg.generated generated on Sun Feb 23 17:57:48 CST 2020.-->
     <!--@Table function_menu-->
     <id column="F_id" jdbcType="VARCHAR" property="fId" />
     <result column="Description" jdbcType="VARCHAR" property="description" />
@@ -10,7 +10,27 @@
     <result column="F_name" jdbcType="VARCHAR" property="fName" />
   </resultMap>
   <sql id="Base_Column_List">
-    <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
+    <!--@mbg.generated generated on Sun Feb 23 17:57:48 CST 2020.-->
     F_id, Description, F_url, F_name
   </sql>
+
+  <select id="selectByAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from function_menu
+    <where>
+      <if test="functionMenu.FId != null and functionMenu.FId != ''">
+        F_id like CONCAT ('%',#{functionMenu.FId},'%')
+      </if>
+      <if test="functionMenu.description != null and functionMenu.description != ''">
+        and Description like CONCAT ('%',#{functionMenu.description},'%')
+      </if>
+      <if test="functionMenu.FName != null and functionMenu.FName != ''">
+        and F_name like CONCAT ('%',#{functionMenu.FName},'%')
+      </if>
+      <if test="param1.FUrl != null and param1.FUrl != ''">
+        and F_url like CONCAT ('%',#{functionMenu.FUrl},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

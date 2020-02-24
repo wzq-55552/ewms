@@ -30,7 +30,7 @@ import javax.sql.DataSource;
 import java.util.Arrays;
 
 /**
- * Title：授权认证服务器，旭日项目使用密码模式就可以啦
+ * Title：spring security授权认证服务器，旭日项目使用密码模式就可以啦
  * Description：数据不保存到内存，保存在数据库中，提高服务器效率
  *              AuthorizationServerConfigurerAdapter需要实现3个configure方法
  * @author WZQ

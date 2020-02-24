@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import javax.annotation.Resource;
 
 /**
- * Title：资源服务配置
+ * Title：spring security资源服务配置
  * Description：需要实现2个configure方法，各自有一个资源id
  * @author WZQ
  * @version 1.0.0

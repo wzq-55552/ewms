@@ -15,4 +15,34 @@
     <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
     First_id, User_id, Equipment, In_date, Out_date, Out_type
   </sql>
+
+  <select id="selectByAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from log_in
+    <where>
+      <if test="userId != null and userId != ''">
+      User_id like CONCAT ('%',#{userId},'%')
+      </if>
+      <if test="equipment != null and equipment != '' ">
+      and Equipment like CONCAT ('%',#{equipment} ,'%')
+      </if>
+      <if test="beginDate != null" >
+        and <![CDATA[In_date >= #{beginDate, jdbcType=TIMESTAMP} ]]>
+      </if>
+      <if test="endDate != null">
+        <![CDATA[and Out_date <= #{endDate, jdbcType=TIMESTAMP} ]]>
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByUserIdAndOutDate" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from log_in
+    where
+    User_id = #{userId}
+    and Out_date is null
+  </select>
+
 </mapper>

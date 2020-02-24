@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "operation_role")
 public class OperationRole implements Serializable {
+
     /**
      * 操作资料角色ID
      */
@@ -24,5 +25,5 @@ public class OperationRole implements Serializable {
     @Column(name = "Roid_type")
     private String roidType;
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -3721523069722106224L;
 }

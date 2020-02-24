@@ -11,4 +11,18 @@
     <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
     Roid_id, Roid_type
   </sql>
+
+  <select id="selectByAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from operation_role
+    <where>
+      <if test="roidId != null and roidId != ''">
+        Roid_id like CONCAT ('%',#{roidId},'%')
+      </if>
+      <if test="roidType != null and roidType != ''">
+        and Roid_type like CONCAT ('%',#{roidType},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

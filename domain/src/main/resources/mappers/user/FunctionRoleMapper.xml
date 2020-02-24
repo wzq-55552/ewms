@@ -12,4 +12,21 @@
     <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
     Fr_id, Description, Fr_name
   </sql>
+
+  <select id="selectByAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from function_role
+    <where>
+      <if test="functionRole.frId != null and functionRole.frId != ''">
+        Fr_id like CONCAT ('%',#{functionRole.frId},'%')
+      </if>
+      <if test="functionRole.description != null and functionRole.description != ''">
+        and Description like CONCAT ('%',#{functionRole.description},'%')
+      </if>
+      <if test="functionRole.frName != null and functionRole.frName != ''">
+        and Fr_name like CONCAT ('%',#{functionRole.frName},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

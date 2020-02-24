@@ -4,10 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LmsWarehouseAcc {
+public class LmsWarehouseAcc implements Serializable {
+
+    private static final long serialVersionUID = 4693828660673641243L;
 
     // 仓库号
     private String accNo;

@@ -50,5 +50,5 @@ public class LogIn implements Serializable {
     @Column(name = "Out_type")
     private Integer outType;
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 7374409409461304062L;
 }

@@ -9,8 +9,14 @@
     <result column="Stay_time" jdbcType="INTEGER" property="stayTime" />
     <result column="Remind_time" jdbcType="INTEGER" property="remindTime" />
   </resultMap>
+
   <sql id="Base_Column_List">
     <!--@mbg.generated generated on Wed Feb 19 20:22:21 CST 2020.-->
     User_id, Args_date, Stay_time, Remind_time
   </sql>
+
+  <select id="SelectOneByLastedTime" resultMap="BaseResultMap">
+    select * from time_args order by Args_date desc limit 1
+  </select>
+
 </mapper>

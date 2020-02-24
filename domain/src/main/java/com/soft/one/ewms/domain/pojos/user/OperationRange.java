@@ -23,5 +23,5 @@ public class OperationRange implements Serializable {
     @Column(name = "Acc_no")
     private String accNo;
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -1544090364659327359L;
 }

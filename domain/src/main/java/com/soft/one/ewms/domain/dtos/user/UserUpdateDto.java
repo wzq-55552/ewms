@@ -1,9 +1,18 @@
 package com.soft.one.ewms.domain.dtos.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Data
-public class UserDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserUpdateDto implements Serializable {
+
+    private static final long serialVersionUID = 223783377312812574L;
+
     /**
      * 用户ID,至少6个字符
      */
@@ -18,4 +27,10 @@ public class UserDto {
      * 用户姓名
      */
     private String userName;
+
+    /**
+     * 用户手机，11位
+     */
+    private String tel;
+
 }

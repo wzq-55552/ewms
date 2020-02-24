@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +29,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         //安全密码，有md4.md5,SHA-1,SHA-256
     }
 
+    // 忽略该地址，无需携带token，直接就可以被访问授权
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/is/login");
+    }
+
     /**
      * 设置访问权限
      * web授权或者方法授权
@@ -38,13 +45,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //super.configure(http);
 
+        // 请求头都必须带token
         http.csrf().disable() // 可post
                 .authorizeRequests()
-                .antMatchers("/user/**").authenticated() // 这个url下都必须经过认证
-                .antMatchers("/function/**").authenticated()
-                .antMatchers("/operation/**").authenticated()
+                .antMatchers("/user/**", "/function/**", "/operation/**").authenticated() // 这个url下都必须经过认证
                 .anyRequest().permitAll() // 其他允许通过
                 ;
     }

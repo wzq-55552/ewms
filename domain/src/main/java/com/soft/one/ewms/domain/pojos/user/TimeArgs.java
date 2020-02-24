@@ -36,5 +36,5 @@ public class TimeArgs implements Serializable {
     @Column(name = "Remind_time")
     private Integer remindTime;
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -7084848380161977136L;
 }
