@@ -39,7 +39,6 @@
             <artifactId>jackson-databind</artifactId>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 
 

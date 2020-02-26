@@ -30,9 +30,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     // 忽略该地址，无需携带token，直接就可以被访问授权
+    // 静态资源被拦截
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/is/login");
+        web.ignoring()
+                .antMatchers("/is/login")
+                .antMatchers("/swagger-ui.html");
     }
 
     /**
