@@ -35,8 +35,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers("/is/login")
-                .antMatchers("/swagger-ui.html");
+                .antMatchers(AUTH_WHITELIST); // 忽略swagger ui静态资源
     }
+
+    // -- swagger ui忽略
+    private static final String[] AUTH_WHITELIST = {
+            // -- swagger ui
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/webjars/**"
+    };
 
     /**
      * 设置访问权限

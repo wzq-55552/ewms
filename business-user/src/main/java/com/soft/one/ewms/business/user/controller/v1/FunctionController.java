@@ -14,6 +14,8 @@ import com.soft.one.ewms.domain.pojos.user.OperationRole;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -39,6 +41,7 @@ import java.util.Map;
  * @date 2020/2/19
  */
 @RestController
+@Api(tags = "功能角色和功能菜单")
 @RequestMapping("/function")
 public class FunctionController {
 
@@ -61,6 +64,7 @@ public class FunctionController {
      * @return
      */
     @GetMapping("/get/menu/all")
+    @ApiOperation(value = "获取所有功能菜单")
     @PreAuthorize("hasAnyAuthority('FunctionGetMenuAll','Function')") // 默认管理员可以访问
     public ResponseResult<List<FunctionMenu>> getFunctionMenus(){
         List<FunctionMenu> functionMenus = functionMenuService.selectAll();
@@ -73,6 +77,7 @@ public class FunctionController {
      * @return
      */
     @PostMapping("/insert/menu")
+    @ApiOperation(value = "新增功能")
     @PreAuthorize("hasAnyAuthority('FunctionInsertMenu','Function')") // 默认管理员可以访问，数据库有
     public ResponseResult<Void> InsertFunctionMenu(@RequestBody FunctionMenu functionMenu) {
         if (functionMenu != null && !StringUtils.isBlank(functionMenu.getFId()) && !StringUtils.isBlank(functionMenu.getFName())){
@@ -96,6 +101,7 @@ public class FunctionController {
      * @return
      */
     @PostMapping("/update/menu")
+    @ApiOperation(value = "更新功能")
     @PreAuthorize("hasAnyAuthority('FunctionUpdateMenu','Function')") // 默认管理员可以访问
     public ResponseResult<Void> updateFunctionMenu(@RequestBody FunctionMenu functionMenu) {
         if (functionMenu != null && !StringUtils.isBlank(functionMenu.getFId()) && !StringUtils.isBlank(functionMenu.getFName())){
@@ -118,6 +124,7 @@ public class FunctionController {
      * @return
      */
     @PostMapping("/delete/menu")
+    @ApiOperation(value = "删除功能")
     @PreAuthorize("hasAnyAuthority('FunctionDeleteMenu','Function')") // 默认管理员可以访问
     public ResponseResult<Void> deleteFunctionMenu(@RequestBody Map<String, String> fIdMap) {
         if (fIdMap != null && !StringUtils.isBlank(fIdMap.get("fId"))){
@@ -139,6 +146,7 @@ public class FunctionController {
      * @return
      */
     @PostMapping("/select/menu")
+    @ApiOperation("查询功能，可单一，也可以组合")
     @PreAuthorize("hasAnyAuthority('FunctionSelectMenu','Function')") // 默认管理员可以访问
     public ResponseResult<List<FunctionMenu>> selectFunctionMenu(@RequestBody FunctionMenu functionMenu) {
         if (functionMenu != null){
@@ -193,6 +201,7 @@ public class FunctionController {
      * @return
      */
     @GetMapping("/get/role/all")
+    @ApiOperation("获取所有的功能角色")
     @PreAuthorize("hasAnyAuthority('FunctionGetRoleAll','Function')") // 默认管理员可以访问
     public ResponseResult<List<FunctionRole>> getFunctionRoles(){
         List<FunctionRole> functionRoles = functionRoleService.selectAll();
@@ -206,6 +215,7 @@ public class FunctionController {
      * @return
      */
     @PostMapping("/get/role/range")
+    @ApiOperation("获取该功能角色的权限集合")
     @PreAuthorize("hasAnyAuthority('FunctionGetRoleRange','Function')") // 默认管理员可以访问
     public ResponseResult<List<FunctionMenu>> getFunctionRoleRange(@RequestBody Map<String, String> frIdMap){
         List<FunctionMenu> functionMenus = new ArrayList<>();
@@ -229,6 +239,7 @@ public class FunctionController {
      * @return
      */
     @PostMapping("/insert/role")
+    @ApiOperation(value = "新增功能角色，管理员，物流部")
     @PreAuthorize("hasAnyAuthority('FunctionInsertRole','Function')") // 默认管理员可以访问，数据库有
     public ResponseResult<Void> InsertFunctionRole(@RequestBody FunctionDto functionDto) {
         if (functionDto != null && !StringUtils.isBlank(functionDto.getFrId()) && !StringUtils.isBlank(functionDto.getDescription()) ){
@@ -263,6 +274,7 @@ public class FunctionController {
      * @return
      */
     @PostMapping("/update/role")
+    @ApiOperation(value = "更新功能角色")
     @PreAuthorize("hasAnyAuthority('FunctionUpdateRole','Function')") // 默认管理员可以访问
     public ResponseResult<Void> updateFunctionRole(@RequestBody FunctionDto functionDto) {
         if (functionDto != null && !StringUtils.isBlank(functionDto.getFrId()) && !StringUtils.isBlank(functionDto.getDescription())){
@@ -294,6 +306,7 @@ public class FunctionController {
      * @return
      */
     @PostMapping("/delete/role")
+    @ApiOperation(value = "删除功能角色")
     @PreAuthorize("hasAnyAuthority('FunctionDeleteRole','Function')") // 默认管理员可以访问
     public ResponseResult<Void> deleteFunctionRole(@RequestBody Map<String, String> frIdMap) {
         if (frIdMap != null && !StringUtils.isBlank(frIdMap.get("frId"))){
@@ -317,6 +330,7 @@ public class FunctionController {
      * @return
      */
     @PostMapping("/select/role")
+    @ApiOperation("查询功能角色")
     @PreAuthorize("hasAnyAuthority('FunctionSelectRole','Function')") // 默认管理员可以访问
     public ResponseResult<List<FunctionRole>> selectFunctionRole(@RequestBody FunctionRole functionRole) {
         // 至少有一个条件

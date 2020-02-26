@@ -3,6 +3,9 @@ package com.soft.one.ewms.domain.pojos.user;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

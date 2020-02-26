@@ -13,6 +13,8 @@ import com.soft.one.ewms.domain.pojos.user.OperationRole;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -39,6 +41,7 @@ import java.util.Map;
  * @date 2020/2/19
  */
 @RestController
+@Api(tags = "操作资料角色")
 @RequestMapping("/operation")
 public class OperationController {
 
@@ -57,6 +60,7 @@ public class OperationController {
      * @return
      */
     @GetMapping("/get/acc/nos")
+    @ApiOperation(value = "获取仓库号和仓库类型")
     @PreAuthorize("hasAnyAuthority('OperationGetAccnos','Operation')") // 默认管理员可以访问
     public ResponseResult<List<LmsWarehouseAcc>>getAccNo(){
         //获取json,先启动api模块，不然没有数据
@@ -81,6 +85,7 @@ public class OperationController {
      * @return
      */
     @GetMapping("/get/role/all")
+    @ApiOperation(value = "获取所有的操作角色")
     @PreAuthorize("hasAnyAuthority('OperationGetRoleAll','Operation')") // 默认管理员可以访问
     public ResponseResult<List<OperationRole>> getOperationRoles(){
         List<OperationRole> operationRoles = operationRoleService.selectAll();
@@ -93,6 +98,7 @@ public class OperationController {
      * @return
      */
     @PostMapping("/get/role/range")
+    @ApiOperation(value = "获取该操作资料角色的仓库访问集合")
     @PreAuthorize("hasAnyAuthority('OperationGetRoleRange','Operation')") // 默认管理员可以访问
     public ResponseResult<List<String>> getOperationRoleRange(@RequestBody Map<String, String> roidIdMap){
         List<String> accNos = new ArrayList<>();
@@ -110,6 +116,7 @@ public class OperationController {
      * @return
      */
     @PostMapping("/insert/role")
+    @ApiOperation(value = "新增操作资料角色，公司")
     @PreAuthorize("hasAnyAuthority('OperationInsertRole','Operation')") // 默认管理员可以访问，数据库有
     public ResponseResult<Void> InsertOperationRole(@RequestBody OperationDto operationDto) {
         if (operationDto != null && !StringUtils.isBlank(operationDto.getRoidId())
@@ -142,6 +149,7 @@ public class OperationController {
      * @return
      */
     @PostMapping("/update/role")
+    @ApiOperation(value = "更新操作资料角色")
     @PreAuthorize("hasAnyAuthority('OperationUpdateRole','Operation')") // 默认管理员可以访问
     public ResponseResult<Void> updateOperationRole(@RequestBody OperationDto operationDto) {
         if (operationDto != null && !StringUtils.isBlank(operationDto.getRoidId())){
@@ -174,6 +182,7 @@ public class OperationController {
      * @return
      */
     @PostMapping("/delete/role")
+    @ApiOperation(value = "删除操作资料角色")
     @PreAuthorize("hasAnyAuthority('OperationDeleteRole','Operation')") // 默认管理员可以访问
     public ResponseResult<Void> deleteOperationRole(@RequestBody Map<String, String> roidIdMap) {
         if (roidIdMap != null && !StringUtils.isBlank(roidIdMap.get("roidId"))){
@@ -196,6 +205,7 @@ public class OperationController {
      * @return
      */
     @PostMapping("/select/role")
+    @ApiOperation(value = "查询操作资料角色")
     @PreAuthorize("hasAnyAuthority('OperationSelectRole','Operation')") // 默认管理员可以访问
     public ResponseResult<List<OperationRole>> selectOperationRole(@RequestBody OperationRole operationRole) {
         // 至少有一个条件

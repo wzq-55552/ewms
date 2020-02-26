@@ -17,6 +17,8 @@ import com.soft.one.ewms.domain.pojos.user.LogIn;
 import com.soft.one.ewms.domain.pojos.user.OperationRole;
 import com.soft.one.ewms.domain.pojos.user.TimeArgs;
 import com.soft.one.ewms.domain.pojos.user.UserInformation;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,7 @@ import java.util.Map;
  * @date 2020/2/19
  */
 @RestController
+@Api(tags = "用户相关的业务")
 public class UserController {
 
     @Resource
@@ -69,6 +72,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/user/select/one")
+    @ApiOperation(value = "通过用户id获取用户信息")
     @PreAuthorize("isAuthenticated()") // 任何用户都可以
     public ResponseResult<UserInformationDto> selectOne(@RequestBody Map<String,String> userIdMap){
         // 用户id不为空
@@ -102,6 +106,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/user/update")
+    @ApiOperation(value = "用户修改个人信息，包括密码，只传id和密码也行")
     @PreAuthorize("hasAnyAuthority('UserUpdate','User')") // 资源权限
     public ResponseResult<Void> update(@RequestBody UserUpdateDto userUpdateDto){
         // 用户id不为空
@@ -129,6 +134,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/is/login") // 不用token也可以访问，登录成功前
+    @ApiOperation(value = "判断该用户是否被其他设备登录，通过控制档，不用token,这个成功后其他的操作都要带token")
     public ResponseResult<Void> IsLogin(@RequestBody ControlIn controlIn){
         if (controlIn!=null && !StringUtils.isBlank(controlIn.getUserId()) && !StringUtils.isBlank(controlIn.getEquipment())){
             List<ControlIn> controlIns = controlInService.selectByUserId(controlIn.getUserId());
@@ -153,6 +159,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/user/login/insert")
+    @ApiOperation(value = "登录成功后的一些操作")
     @PreAuthorize("isAuthenticated()") // 不用权限，请求头还是得有token
     public ResponseResult<TimeDto> LoginInsert(@RequestBody LoginInsertDto loginInsertDto){
         if (loginInsertDto != null){
@@ -195,6 +202,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/user/logout/own")
+    @ApiOperation(value = "用户自己退出登录，记录操作")
     @PreAuthorize("isAuthenticated()") // 不用权限，请求头还是得有token
     public ResponseResult<Void> LogoutUser(@RequestBody Map<String,String> userIdMap){
         if (userIdMap != null){
@@ -212,6 +220,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/user/logout/system")
+    @ApiOperation(value = "系统退出用户登录，记录操作")
     @PreAuthorize("isAuthenticated()") // 不用权限，请求头还是得有token
     public ResponseResult<Void> LogoutSystem(@RequestBody Map<String,String> userIdMap){
         if (userIdMap != null){

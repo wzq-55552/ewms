@@ -17,6 +17,8 @@ import com.soft.one.ewms.domain.pojos.user.LogIn;
 import com.soft.one.ewms.domain.pojos.user.OperationRole;
 import com.soft.one.ewms.domain.pojos.user.TimeArgs;
 import com.soft.one.ewms.domain.pojos.user.UserInformation;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,7 @@ import java.util.List;
  * @date 2020/2/20
  */
 @RestController
+@Api(tags = "管理员用户的一些操作")
 public class AdminController {
 
     @Resource
@@ -66,6 +69,7 @@ public class AdminController {
      * @return
      */
     @PostMapping("/user/insert")
+    @ApiOperation(value = "管理员添加用户")
     @PreAuthorize("hasAnyAuthority('UserInsert','User')") // 资源权限
     public ResponseResult<Void> insert(@RequestBody UserInsertDto userDto){
         // 空异常让前端校验
@@ -92,6 +96,7 @@ public class AdminController {
      * @return
      */
     @GetMapping("/user/get/login/all")
+    @ApiOperation(value = "管理员进去登录记录档查询页面加载的起始数据")
     @PreAuthorize("hasAnyAuthority('UserGetLoginAll','User')") // 资源权限,'User'表示/user/**
     public ResponseResult<List<LogIn>> loginAll(){
         List<LogIn> logIns = logInService.selectAll();
@@ -108,6 +113,7 @@ public class AdminController {
      * @return
      */
     @PostMapping("/user/login/search")
+    @ApiOperation(value = "管理员查询登录log档")
     @PreAuthorize("hasAnyAuthority('UserLoginSearch','User')") // 资源权限,'User'表示/user/**
     public ResponseResult<List<LogIn>> loginSearch(@RequestBody LoginSearchDto loginSearchDto){
 
@@ -131,6 +137,7 @@ public class AdminController {
      * @return
      */
     @GetMapping("/user/get/time/all")
+    @ApiOperation(value = "管理员拿到所有修改时间参数的记录，页面起始数据")
     @PreAuthorize("hasAnyAuthority('UserGetTimeAll','User')") // 管理员才可以
     public ResponseResult<List<TimeArgs>> userTimeAll(){
         List<TimeArgs> timeArgs = timeArgsService.selectAll();
@@ -147,6 +154,7 @@ public class AdminController {
      * @return
      */
     @GetMapping("/user/time/lasted")
+    @ApiOperation(value = "前端获取管理员最晚修改参数的一条数据")
     @PreAuthorize("isAuthenticated()") // 不用权限，请求头还是得有token
     public ResponseResult<TimeArgs> userTimeLasted(){
         TimeArgs timeArgs = timeArgsService.selectOneByLastedTime();
@@ -162,6 +170,7 @@ public class AdminController {
      * @return
      */
     @PostMapping("/user/time/insert")
+    @ApiOperation(value = "管理员修改时间参数，即是增加一条数据")
     @PreAuthorize("hasAnyAuthority('UserTimeInsert','User')") // 管理员才可以
     public ResponseResult<Void> userTimeInsert(@RequestBody TimeInsertDto timeInsertDto){
         if (timeInsertDto != null && !StringUtils.isBlank(timeInsertDto.getUserId())){
@@ -185,6 +194,7 @@ public class AdminController {
      * @return
      */
     @GetMapping("/user/get/all")
+    @ApiOperation(value = "管理员分配角色时显示所有用户数据")
     @PreAuthorize("hasAnyAuthority('UserGetAll','User')") // 资源权限,'User'表示/user/**
     public ResponseResult<List<UserInformationDto>> GetAll(){
         List<UserInformation> userInformations = userInformationService.selectAll();
@@ -210,11 +220,12 @@ public class AdminController {
 
     /**
      * 管理员分配用户角色，管理员才可以访问
-     * 修改、设定、删除这个这个方法。根据角色id的值
+     * 修改、设定、删除都是这个方法。根据角色id的值
      * @param userRoleDto 用户id,2个角色id
      * @return
      */
     @PostMapping("/user/update/role")
+    @ApiOperation(value = "管理员分配用户角色，修改、设定、删除都是这个方法。根据角色id的值")
     @PreAuthorize("hasAnyAuthority('UserUpdateRole','User')") // 资源权限
     public ResponseResult<Void> updateRole(@RequestBody UserRoleDto userRoleDto){
         // 用户id不为空
@@ -251,11 +262,12 @@ public class AdminController {
     }
 
     /**
-     * 管理员查询分配角色的功用户
+     * 管理员通过分配的角色和用户id信息查询用户
      * @param userRoleDto
      * @return
      */
     @PostMapping("/user/select/role")
+    @ApiOperation(value = "管理员通过分配的角色和用户id信息查询用户")
     @PreAuthorize("hasAnyAuthority('UserSelectRole','User')") // 资源权限
     public ResponseResult<List<UserInformation>> SelectRole(@RequestBody UserRoleDto userRoleDto){
         // 至少一个条件不为空

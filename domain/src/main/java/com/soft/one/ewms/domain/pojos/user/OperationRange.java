@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "operation_range")
 public class OperationRange implements Serializable {
+
     /**
      * 操作资料角色ID
      */

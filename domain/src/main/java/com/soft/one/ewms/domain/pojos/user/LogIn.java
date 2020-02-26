@@ -3,6 +3,9 @@ package com.soft.one.ewms.domain.pojos.user;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "log_in")
+@ApiModel(value = "登录记录档")
 public class LogIn implements Serializable {
     /**
      * 自增序号
@@ -24,12 +28,14 @@ public class LogIn implements Serializable {
      * 用户ID
      */
     @Column(name = "User_id")
+    @ApiModelProperty(value = "用户ID")
     private String userId;
 
     /**
      * 电脑/手机的MAC地址
      */
     @Column(name = "Equipment")
+    @ApiModelProperty(value = "设备ID")
     private String equipment;
 
     /**
