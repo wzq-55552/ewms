@@ -1,0 +1,1356 @@
+
+[[_paths]]
+== Paths
+
+[[_deletefunctionmenuusingpost]]
+=== 删除功能
+....
+POST /function/delete/menu
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**fIdMap** +
+__required__|fIdMap|< string, string > map
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 功能角色和功能菜单
+
+
+[[_deletefunctionroleusingpost]]
+=== 删除功能角色
+....
+POST /function/delete/role
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**frIdMap** +
+__required__|frIdMap|< string, string > map
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 功能角色和功能菜单
+
+
+[[_getfunctionmenususingget]]
+=== 获取所有功能菜单
+....
+GET /function/get/menu/all
+....
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_1d14f90626db1cb66ae296160bfad609,ResponseResult«List«功能类»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 功能角色和功能菜单
+
+
+[[_getfunctionrolesusingget]]
+=== 获取所有的功能角色
+....
+GET /function/get/role/all
+....
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_e614296ea2b947538762c1958e342924,ResponseResult«List«功能角色类»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 功能角色和功能菜单
+
+
+[[_getfunctionrolerangeusingpost]]
+=== 获取该功能角色的权限集合
+....
+POST /function/get/role/range
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**frIdMap** +
+__required__|frIdMap|< string, string > map
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_1d14f90626db1cb66ae296160bfad609,ResponseResult«List«功能类»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 功能角色和功能菜单
+
+
+[[_insertfunctionmenuusingpost]]
+=== 新增功能
+....
+POST /function/insert/menu
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**functionMenu** +
+__required__|functionMenu|<<_773e6d03db2fb67d304e5a7f6156721d,功能类>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 功能角色和功能菜单
+
+
+[[_insertfunctionroleusingpost]]
+=== 新增功能角色，管理员，物流部
+....
+POST /function/insert/role
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**functionDto** +
+__required__|functionDto|<<_2d5e7db07e931c2a035b12c4a5c9cecc,功能角色DTO，增加修改功能角色都是传这些>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 功能角色和功能菜单
+
+
+[[_selectfunctionmenuusingpost]]
+=== 查询功能，可单一，也可以组合
+....
+POST /function/select/menu
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**functionMenu** +
+__required__|functionMenu|<<_773e6d03db2fb67d304e5a7f6156721d,功能类>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_1d14f90626db1cb66ae296160bfad609,ResponseResult«List«功能类»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 功能角色和功能菜单
+
+
+[[_selectfunctionroleusingpost]]
+=== 查询功能角色
+....
+POST /function/select/role
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**functionRole** +
+__required__|functionRole|<<_8cad8b2f52f95ecb0135c7e14c2dcb3d,功能角色类>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_e614296ea2b947538762c1958e342924,ResponseResult«List«功能角色类»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 功能角色和功能菜单
+
+
+[[_updatefunctionmenuusingpost]]
+=== 更新功能
+....
+POST /function/update/menu
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**functionMenu** +
+__required__|functionMenu|<<_773e6d03db2fb67d304e5a7f6156721d,功能类>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 功能角色和功能菜单
+
+
+[[_updatefunctionroleusingpost]]
+=== 更新功能角色
+....
+POST /function/update/role
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**functionDto** +
+__required__|functionDto|<<_2d5e7db07e931c2a035b12c4a5c9cecc,功能角色DTO，增加修改功能角色都是传这些>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 功能角色和功能菜单
+
+
+[[_isloginusingpost]]
+=== 判断该用户是否被其他设备登录，通过控制档，不用token,这个成功后其他的操作都要带token
+....
+POST /is/login
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**controlIn** +
+__required__|controlIn|<<_db36308dad9b01e2421d5915192a6058,控制档>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 用户相关的业务
+
+
+[[_deleteoperationroleusingpost]]
+=== 删除操作资料角色
+....
+POST /operation/delete/role
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**roidIdMap** +
+__required__|roidIdMap|< string, string > map
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 操作资料角色
+
+
+[[_getaccnousingget]]
+=== 获取仓库号和仓库类型
+....
+GET /operation/get/acc/nos
+....
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_7d6be6f5f9d128530d2d91c51fb5b8cb,ResponseResult«List«LmsWarehouseAcc»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 操作资料角色
+
+
+[[_getoperationrolesusingget]]
+=== 获取所有的操作角色
+....
+GET /operation/get/role/all
+....
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_1eb58b3e3f86c17b76813d97742ce2e8,ResponseResult«List«操作角色类，类似公司名»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 操作资料角色
+
+
+[[_getoperationrolerangeusingpost]]
+=== 获取该操作资料角色的仓库访问集合
+....
+POST /operation/get/role/range
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**roidIdMap** +
+__required__|roidIdMap|< string, string > map
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_70285ef4c119fb9026db4a18f40f0c00,ResponseResult«List«string»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 操作资料角色
+
+
+[[_insertoperationroleusingpost]]
+=== 新增操作资料角色，公司
+....
+POST /operation/insert/role
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**operationDto** +
+__required__|operationDto|<<_67aafc19a3b6b078232dc14928e333d6,操作资料角色dto，增加，修改>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 操作资料角色
+
+
+[[_selectoperationroleusingpost]]
+=== 查询操作资料角色
+....
+POST /operation/select/role
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**operationRole** +
+__required__|operationRole|<<_fc160c17decb7471f7d57c8be7b5f980,操作角色类，类似公司名>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_1eb58b3e3f86c17b76813d97742ce2e8,ResponseResult«List«操作角色类，类似公司名»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 操作资料角色
+
+
+[[_updateoperationroleusingpost]]
+=== 更新操作资料角色
+....
+POST /operation/update/role
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**operationDto** +
+__required__|operationDto|<<_67aafc19a3b6b078232dc14928e333d6,操作资料角色dto，增加，修改>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 操作资料角色
+
+
+[[_getallusingget]]
+=== 管理员分配角色时显示所有用户数据
+....
+GET /user/get/all
+....
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_cfce51469f6600e363e3a63617d93331,ResponseResult«List«传输给前端的用户信息类»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 管理员用户的一些操作
+
+
+[[_loginallusingget]]
+=== 管理员进去登录记录档查询页面加载的起始数据
+....
+GET /user/get/login/all
+....
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_09a50b7c5128dcf1d89613e6aa46d3eb,ResponseResult«List«登录记录档»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 管理员用户的一些操作
+
+
+[[_usertimeallusingget]]
+=== 管理员拿到所有修改时间参数的记录，页面起始数据
+....
+GET /user/get/time/all
+....
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_584895ff43ee0a8140efb5627c016188,ResponseResult«List«TimeArgs»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 管理员用户的一些操作
+
+
+[[_insertusingpost]]
+=== 管理员添加用户
+....
+POST /user/insert
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**userDto** +
+__required__|userDto|<<_e936a01865d6a0a99d730054da0509c4,管理员添加用户>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 管理员用户的一些操作
+
+
+[[_logininsertusingpost]]
+=== 登录成功后的一些操作
+....
+POST /user/login/insert
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**loginInsertDto** +
+__required__|loginInsertDto|<<_bc8d917a641a6587f9cc542e3c385083,增加登陆档>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_ecca5dd4996e9803365dcc23d6c3b136,ResponseResult«提醒修改密码参数档dto»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 用户相关的业务
+
+
+[[_loginsearchusingpost]]
+=== 管理员查询登录log档
+....
+POST /user/login/search
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**loginSearchDto** +
+__required__|loginSearchDto|<<_0131f682fad94349240ef9ee03eca0d2,查询登录档dto,3个条件>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_09a50b7c5128dcf1d89613e6aa46d3eb,ResponseResult«List«登录记录档»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 管理员用户的一些操作
+
+
+[[_logoutuserusingpost]]
+=== 用户自己退出登录，记录操作
+....
+POST /user/logout/own
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**userIdMap** +
+__required__|userIdMap|< string, string > map
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 用户相关的业务
+
+
+[[_logoutsystemusingpost]]
+=== 系统退出用户登录，记录操作
+....
+POST /user/logout/system
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**userIdMap** +
+__required__|userIdMap|< string, string > map
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 用户相关的业务
+
+
+[[_selectoneusingget]]
+=== 通过用户id获取用户信息
+....
+GET /user/select/one
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**userIdMap** +
+__required__|userIdMap|< string, string > map
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_76ca750b0206415088b02edd5ec3c8ad,ResponseResult«传输给前端的用户信息类»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 用户相关的业务
+
+
+[[_selectroleusingpost]]
+=== 管理员通过分配的角色和用户id信息查询用户
+....
+POST /user/select/role
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**userRoleDto** +
+__required__|userRoleDto|<<_3f6fe684185b16ce3fe7778f0732da00,分配用户角色dto,可修改，可删除，给后端空就是删除>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_a21fc04d145f353d9ab3dc39ab93a17d,ResponseResult«List«UserInformation»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 管理员用户的一些操作
+
+
+[[_usertimeinsertusingpost]]
+=== 管理员修改时间参数，即是增加一条数据
+....
+POST /user/time/insert
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**timeInsertDto** +
+__required__|timeInsertDto|<<_eee9cb3134ff1b6174bd08752141f4a5,管理员增加时间参数档>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 管理员用户的一些操作
+
+
+[[_usertimelastedusingget]]
+=== 前端获取管理员最晚修改参数的一条数据
+....
+GET /user/time/lasted
+....
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_508d163f63ba21ac482cd82cb5f8028a,ResponseResult«TimeArgs»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 管理员用户的一些操作
+
+
+[[_updateusingpost]]
+=== 用户修改个人信息，包括密码，只传id和密码也行
+....
+POST /user/update
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**userUpdateDto** +
+__required__|userUpdateDto|<<_164cafea63a67208e6f6aba161e989b0,用户修改个人信息>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 用户相关的业务
+
+
+[[_updateroleusingpost]]
+=== 管理员分配用户角色，修改、设定、删除都是这个方法。根据角色id的值
+....
+POST /user/update/role
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**userRoleDto** +
+__required__|userRoleDto|<<_3f6fe684185b16ce3fe7778f0732da00,分配用户角色dto,可修改，可删除，给后端空就是删除>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_908eff3e0cb7014135f8389d05d728a6,ResponseResult«Void»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* 管理员用户的一些操作
+
+
+

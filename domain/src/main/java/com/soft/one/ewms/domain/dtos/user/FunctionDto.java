@@ -20,13 +20,13 @@ public class FunctionDto implements Serializable {
     /**
      * 功能角色ID
      */
-    @ApiModelProperty(value = "功能角色id")
+    @ApiModelProperty(value = "功能角色id",required = true)
     private String frId;
 
     /**
      * 功能角色描述
      */
-    @ApiModelProperty(value = "功能角色描述，需要填的，前端页面显示")
+    @ApiModelProperty(value = "功能角色描述，需要填的，前端页面显示",required = true)
     private String description;
 
     /**

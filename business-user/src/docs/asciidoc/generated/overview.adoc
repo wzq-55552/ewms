@@ -1,0 +1,41 @@
+= 旭日真维斯用户权限模块在线API文档
+
+
+[[_overview]]
+== Overview
+Swagger2在线API文档
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : v1.0
+
+
+=== Contact information
+[%hardbreaks]
+__Contact__ : 吴泽强
+__Contact Email__ : @qq.com
+
+
+=== License information
+[%hardbreaks]
+__License__ : Apache 2.0
+__License URL__ : http://www.apache.org/licenses/LICENSE-2.0
+__Terms of service__ : https://www.baidu.com/
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost:8080
+__BasePath__ : /
+
+
+=== Tags
+
+* 功能角色和功能菜单 : Function Controller
+* 操作资料角色 : Operation Controller
+* 用户相关的业务 : User Controller
+* 管理员用户的一些操作 : Admin Controller
+
+
+

@@ -19,7 +19,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value = "查询登录档dto")
+@ApiModel(value = "查询登录档dto,3个条件")
 public class LoginSearchDto implements Serializable {
 
     private static final long serialVersionUID = -1634086296792675144L;

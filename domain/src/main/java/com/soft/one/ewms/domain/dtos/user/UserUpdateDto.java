@@ -19,7 +19,7 @@ public class UserUpdateDto implements Serializable {
     /**
      * 用户ID,至少6个字符
      */
-    @ApiModelProperty(value = "用户ID")
+    @ApiModelProperty(value = "用户ID",required = true)
     private String userId;
 
     /**

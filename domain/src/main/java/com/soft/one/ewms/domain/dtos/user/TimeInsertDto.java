@@ -19,19 +19,19 @@ public class TimeInsertDto implements Serializable {
     /**
      * 用户ID,记录修改参数的管理员
      */
-    @ApiModelProperty(value = "用户ID,记录修改参数的管理员")
+    @ApiModelProperty(value = "用户ID,记录修改参数的管理员",required = true)
     private String userId;
 
     /**
      * 画面停留时间，以分为单位
      */
-    @ApiModelProperty(value = "画面停留时间，以分为单位")
+    @ApiModelProperty(value = "画面停留时间，以分为单位，没改就保留页面那个值")
     private Integer stayTime;
 
     /**
      * 定期修改密码提醒时间，以天为单位
      */
-    @ApiModelProperty(value = "定期修改密码提醒时间，以天为单位")
+    @ApiModelProperty(value = "定期修改密码提醒时间，以天为单位，没改就保留页面那个值")
     private Integer remindTime;
 
 }

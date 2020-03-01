@@ -28,14 +28,14 @@ public class LogIn implements Serializable {
      * 用户ID
      */
     @Column(name = "User_id")
-    @ApiModelProperty(value = "用户ID")
+    @ApiModelProperty(value = "用户ID",required = true)
     private String userId;
 
     /**
      * 电脑/手机的MAC地址
      */
     @Column(name = "Equipment")
-    @ApiModelProperty(value = "设备ID")
+    @ApiModelProperty(value = "设备ID",required = true)
     private String equipment;
 
     /**

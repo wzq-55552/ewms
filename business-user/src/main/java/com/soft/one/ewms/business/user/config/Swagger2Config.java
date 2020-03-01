@@ -25,7 +25,7 @@ public class Swagger2Config {
 
     @Bean
     public Docket docket() {
-        return new Docket(DocumentationType.SWAGGER_2).groupName("user微服务") // 分组名
+        return new Docket(DocumentationType.SWAGGER_2)//.groupName("user微服务") // 分组名
                 // 指定构建api文档的详细信息的方法：apiInfo()
                 .apiInfo(apiInfo())
                 //.enable(false) // 是否开启Swagger2，发布环境就要false，默认true

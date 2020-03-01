@@ -20,7 +20,7 @@ public class OperationDto implements Serializable {
     /**
      * 操作资料角色ID
      */
-    @ApiModelProperty(value = "操作资料角色ID，不可空")
+    @ApiModelProperty(value = "操作资料角色ID，不可空",required = true)
     private String roidId;
 
     /**

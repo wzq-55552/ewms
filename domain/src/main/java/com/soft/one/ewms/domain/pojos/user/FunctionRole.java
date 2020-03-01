@@ -21,14 +21,14 @@ public class FunctionRole implements Serializable {
      */
     @Id
     @Column(name = "Fr_id")
-    @ApiModelProperty(value = "功能角色ID")
+    @ApiModelProperty(value = "功能角色ID",required = true)
     private String frId;
 
     /**
      * 功能角色描述
      */
     @Column(name = "Description")
-    @ApiModelProperty(value = "前端显示的功能角色描述，不显示id")
+    @ApiModelProperty(value = "前端显示的功能角色描述，不显示id",required = true)
     private String description;
 
     /**

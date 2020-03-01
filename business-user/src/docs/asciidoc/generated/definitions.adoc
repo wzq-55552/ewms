@@ -1,0 +1,492 @@
+
+[[_definitions]]
+== Definitions
+
+[[_lmswarehouseacc]]
+=== LmsWarehouseAcc
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**accNo** +
+__optional__|string
+|**accType** +
+__optional__|integer (int32)
+|===
+
+
+[[_7d6be6f5f9d128530d2d91c51fb5b8cb]]
+=== ResponseResult«List«LmsWarehouseAcc»»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|< <<_lmswarehouseacc,LmsWarehouseAcc>> > array
+|**message** +
+__optional__|string
+|===
+
+
+[[_584895ff43ee0a8140efb5627c016188]]
+=== ResponseResult«List«TimeArgs»»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|< <<_timeargs,TimeArgs>> > array
+|**message** +
+__optional__|string
+|===
+
+
+[[_a21fc04d145f353d9ab3dc39ab93a17d]]
+=== ResponseResult«List«UserInformation»»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|< <<_userinformation,UserInformation>> > array
+|**message** +
+__optional__|string
+|===
+
+
+[[_70285ef4c119fb9026db4a18f40f0c00]]
+=== ResponseResult«List«string»»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|< string > array
+|**message** +
+__optional__|string
+|===
+
+
+[[_cfce51469f6600e363e3a63617d93331]]
+=== ResponseResult«List«传输给前端的用户信息类»»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|< <<_9fdeedf6644312874fc25b3c48a45c00,传输给前端的用户信息类>> > array
+|**message** +
+__optional__|string
+|===
+
+
+[[_1d14f90626db1cb66ae296160bfad609]]
+=== ResponseResult«List«功能类»»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|< <<_773e6d03db2fb67d304e5a7f6156721d,功能类>> > array
+|**message** +
+__optional__|string
+|===
+
+
+[[_e614296ea2b947538762c1958e342924]]
+=== ResponseResult«List«功能角色类»»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|< <<_8cad8b2f52f95ecb0135c7e14c2dcb3d,功能角色类>> > array
+|**message** +
+__optional__|string
+|===
+
+
+[[_1eb58b3e3f86c17b76813d97742ce2e8]]
+=== ResponseResult«List«操作角色类，类似公司名»»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|< <<_fc160c17decb7471f7d57c8be7b5f980,操作角色类，类似公司名>> > array
+|**message** +
+__optional__|string
+|===
+
+
+[[_09a50b7c5128dcf1d89613e6aa46d3eb]]
+=== ResponseResult«List«登录记录档»»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|< <<_925d0b2183cba876ca5da810e03e8b5a,登录记录档>> > array
+|**message** +
+__optional__|string
+|===
+
+
+[[_508d163f63ba21ac482cd82cb5f8028a]]
+=== ResponseResult«TimeArgs»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|<<_timeargs,TimeArgs>>
+|**message** +
+__optional__|string
+|===
+
+
+[[_908eff3e0cb7014135f8389d05d728a6]]
+=== ResponseResult«Void»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**message** +
+__optional__|string
+|===
+
+
+[[_76ca750b0206415088b02edd5ec3c8ad]]
+=== ResponseResult«传输给前端的用户信息类»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|<<_9fdeedf6644312874fc25b3c48a45c00,传输给前端的用户信息类>>
+|**message** +
+__optional__|string
+|===
+
+
+[[_ecca5dd4996e9803365dcc23d6c3b136]]
+=== ResponseResult«提醒修改密码参数档dto»
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|<<_7b5d78c642322b69c1af08ed176da3b7,提醒修改密码参数档dto>>
+|**message** +
+__optional__|string
+|===
+
+
+[[_timeargs]]
+=== TimeArgs
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**argsDate** +
+__optional__|string (date-time)
+|**remindTime** +
+__optional__|integer (int32)
+|**stayTime** +
+__optional__|integer (int32)
+|**userId** +
+__optional__|string
+|===
+
+
+[[_userinformation]]
+=== UserInformation
+
+[options="header", cols=".^3a,.^4a"]
+|===
+|Name|Schema
+|**frId** +
+__optional__|string
+|**pswDate** +
+__optional__|string (date-time)
+|**roidId** +
+__optional__|string
+|**tel** +
+__optional__|string
+|**userId** +
+__optional__|string
+|**userName** +
+__optional__|string
+|===
+
+
+[[_9fdeedf6644312874fc25b3c48a45c00]]
+=== 传输给前端的用户信息类
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**frId** +
+__optional__|功能角色id|string
+|**frIdDescription** +
+__optional__|功能角色中文描述，前端显示这个，不显示id|string
+|**pswDate** +
+__optional__|密码更改日期与时间，Date类型，精确到秒，yyyy-mm-dd hh:mm:ss|string (date-time)
+|**roidId** +
+__optional__|操作资料角色ID|string
+|**roidIdDescription** +
+__optional__|操作资料角色中文描述，前端显示这个，不显示id|string
+|**tel** +
+__optional__|用户手机，11位|string
+|**userId** +
+__optional__||string
+|**userName** +
+__optional__||string
+|===
+
+
+[[_3f6fe684185b16ce3fe7778f0732da00]]
+=== 分配用户角色dto,可修改，可删除，给后端空就是删除
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**frId** +
+__optional__|功能角色ID|string
+|**roidId** +
+__optional__|操作资料角色ID|string
+|**userId** +
+__optional__||string
+|===
+
+
+[[_773e6d03db2fb67d304e5a7f6156721d]]
+=== 功能类
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**description** +
+__optional__|功能描述，前端需要显示这个|string
+|**fid** +
+__optional__||string
+|**fname** +
+__optional__||string
+|**furl** +
+__optional__||string
+|===
+
+
+[[_2d5e7db07e931c2a035b12c4a5c9cecc]]
+=== 功能角色DTO，增加修改功能角色都是传这些
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**description** +
+__required__|功能角色描述，需要填的，前端页面显示|string
+|**fids** +
+__optional__||< string > array
+|**frId** +
+__required__|功能角色id|string
+|**frName** +
+__optional__|功能角色英文名，可空|string
+|===
+
+
+[[_8cad8b2f52f95ecb0135c7e14c2dcb3d]]
+=== 功能角色类
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**description** +
+__required__|前端显示的功能角色描述，不显示id|string
+|**frId** +
+__required__|功能角色ID|string
+|**frName** +
+__optional__|功能角色英文描述|string
+|===
+
+
+[[_bc8d917a641a6587f9cc542e3c385083]]
+=== 增加登陆档
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**equipment** +
+__required__|设备id|string
+|**userId** +
+__required__|用户id|string
+|===
+
+
+[[_db36308dad9b01e2421d5915192a6058]]
+=== 控制档
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**equipment** +
+__optional__|电脑/手机的MAC地址|string
+|**id** +
+__optional__||integer (int64)
+|**userId** +
+__optional__|用户ID|string
+|===
+
+
+[[_7b5d78c642322b69c1af08ed176da3b7]]
+=== 提醒修改密码参数档dto
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**pswDate** +
+__optional__|用户密码更改日期与时间，给前端该用户的最后一次修改密码时间|string (date-time)
+|**remindTime** +
+__optional__|定期修改密码提醒时间，int的，表示天数|integer (int32)
+|===
+
+
+[[_fc160c17decb7471f7d57c8be7b5f980]]
+=== 操作角色类，类似公司名
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**roidId** +
+__optional__|操作资料角色ID|string
+|**roidType** +
+__optional__|操作资料角色名，即公司名|string
+|===
+
+
+[[_67aafc19a3b6b078232dc14928e333d6]]
+=== 操作资料角色dto，增加，修改
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**accNos** +
+__optional__|仓库权限集合，空则表示无权限|< string > array
+|**roidId** +
+__required__|操作资料角色ID，不可空|string
+|**roidType** +
+__optional__|操作资料角色名|string
+|===
+
+
+[[_0131f682fad94349240ef9ee03eca0d2]]
+=== 查询登录档dto,3个条件
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**beginDate** +
+__optional__|Date数据，起始时间，一个时间段来搜索,yyyy-mm-dd hh:mm:ss|string (date-time)
+|**endDate** +
+__optional__|结束时间，Date数据，一个时间段来搜索,yyyy-mm-dd hh:mm:ss|string (date-time)
+|**equipment** +
+__optional__|设备id|string
+|**userId** +
+__optional__|用户ID|string
+|===
+
+
+[[_164cafea63a67208e6f6aba161e989b0]]
+=== 用户修改个人信息
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**tel** +
+__optional__|用户手机|string
+|**userId** +
+__required__|用户ID|string
+|**userName** +
+__optional__|用户姓名|string
+|**userPsw** +
+__optional__|用户密码|string
+|===
+
+
+[[_925d0b2183cba876ca5da810e03e8b5a]]
+=== 登录记录档
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**equipment** +
+__required__|设备ID|string
+|**firstId** +
+__optional__||integer (int64)
+|**inDate** +
+__optional__||string (date-time)
+|**outDate** +
+__optional__||string (date-time)
+|**outType** +
+__optional__||integer (int32)
+|**userId** +
+__required__|用户ID|string
+|===
+
+
+[[_eee9cb3134ff1b6174bd08752141f4a5]]
+=== 管理员增加时间参数档
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**remindTime** +
+__optional__|定期修改密码提醒时间，以天为单位，没改就保留页面那个值|integer (int32)
+|**stayTime** +
+__optional__|画面停留时间，以分为单位，没改就保留页面那个值|integer (int32)
+|**userId** +
+__required__|用户ID,记录修改参数的管理员|string
+|===
+
+
+[[_e936a01865d6a0a99d730054da0509c4]]
+=== 管理员添加用户
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**userId** +
+__required__|用户ID,至少6个字符|string
+|**userName** +
+__optional__|用户名字|string
+|**userPsw** +
+__required__|用户密码|string
+|===
+
+
+
