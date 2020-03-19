@@ -34,7 +34,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/is/login")
                 .antMatchers(AUTH_WHITELIST); // 忽略swagger ui静态资源
     }
 

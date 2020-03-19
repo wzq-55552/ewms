@@ -2,25 +2,18 @@ package com.soft.one.ewms.business.user.controller.v1;
 
 import com.soft.one.ewms.business.user.service.OperationRangeService;
 import com.soft.one.ewms.business.user.service.OperationRoleService;
-import com.soft.one.ewms.commons.constants.EsConstant;
 import com.soft.one.ewms.commons.dto.ResponseResult;
 import com.soft.one.ewms.commons.utils.MapperUtils;
 import com.soft.one.ewms.commons.utils.OkHttpClientUtil;
 import com.soft.one.ewms.domain.dtos.user.OperationDto;
 import com.soft.one.ewms.domain.pojos.api.LmsWarehouseAcc;
-import com.soft.one.ewms.domain.pojos.user.OperationRange;
 import com.soft.one.ewms.domain.pojos.user.OperationRole;
-import io.searchbox.client.JestClient;
-import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +33,7 @@ import java.util.Map;
  * @date 2020/2/19
  */
 @RestController
+@CrossOrigin
 @Api(tags = "操作资料角色")
 @RequestMapping("/operation")
 public class OperationController {
@@ -51,8 +44,6 @@ public class OperationController {
     @Resource
     private OperationRangeService operationRangeService;
 
-    @Autowired
-    private JestClient jestClient;
 
     /**
      * 获取仓库号和仓库类型json数据，返回给前端
@@ -65,7 +56,7 @@ public class OperationController {
     public ResponseResult<List<LmsWarehouseAcc>>getAccNo(){
         //获取json,先启动api模块，不然没有数据
         ResponseResult<List<LmsWarehouseAcc>> result = new ResponseResult<>();
-        Response response  = OkHttpClientUtil.getInstance().getData("http://localhost:8090/api/acc/all");
+        Response response  = OkHttpClientUtil.getInstance().getData("http://47.113.80.250:8090/api/acc/all");
         try{
             //解析json
             String jsonString = response.body().string();//json格式数据
@@ -199,8 +190,7 @@ public class OperationController {
 
     /**
      * 查询操作资料角色
-     * id跟角色名，模糊搜索
-     * 单角色名，引用Elasticsearch搜索，中文分词器
+     * 单角色名、id跟角色名，模糊搜索
      * @param operationRole id跟角色名
      * @return
      */
@@ -213,44 +203,11 @@ public class OperationController {
                 !StringUtils.isBlank(operationRole.getRoidType()))){
             List<OperationRole> resultList = new ArrayList<>();
 
-            // 当只有角色关键词不为空时，Elasticsearch搜索，分词中文搜索
-            if (StringUtils.isBlank(operationRole.getRoidId()) &&
-                    !StringUtils.isBlank(operationRole.getRoidType())){
-                // 单条件查询，中文关键词，分词
-                // 构建查询条件 jestClient
-                // 根据关键字查询索引库
-                SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-                // 查询条件，字段title匹配，matchQuery模糊搜索，比like高级，关键字的部分词也可以匹配
-                searchSourceBuilder.query(QueryBuilders.matchQuery("roidType", operationRole.getRoidType()));
-                Search search = new Search.Builder(searchSourceBuilder.toString())
-                        .addIndex(EsConstant.INDEX_OPERATION) //索引库类型，登录档
-                        .addType(EsConstant.DEFAULT_DOC)   //查所有类型的数据
-                        .build();
-                try {
-                    // 获取结果
-                    SearchResult searchResult = jestClient.execute(search);
-                    // 查数据库，补充数据
-                    List<OperationRole> sourceAsObjectList = searchResult.getSourceAsObjectList(OperationRole.class);
-                    // 筛选补充字段数据，获取的数据只有部分字段
-                    for (OperationRole operationRoleIndex : sourceAsObjectList) {
-                        // 补全信息
-                        operationRoleIndex = operationRoleService.selectOne(operationRoleIndex);
-                        if(operationRoleIndex == null){
-                            continue;
-                        }
-                        resultList.add(operationRoleIndex);
-                    }
-                    return new ResponseResult<List<OperationRole>>(ResponseResult.CodeStatus.OK, "查询成功",resultList);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                // 组合模糊搜索
-                resultList = operationRoleService.selectByAll(operationRole.getRoidId(), operationRole.getRoidType());
-                return new ResponseResult<List<OperationRole>>(ResponseResult.CodeStatus.OK, "查询成功", resultList);
-            }
-            return new ResponseResult<List<OperationRole>>(ResponseResult.CodeStatus.FAIL, "内部错误",null);
+            // 组合模糊搜索
+            resultList = operationRoleService.selectByAll(operationRole.getRoidId(), operationRole.getRoidType());
+            return new ResponseResult<List<OperationRole>>(ResponseResult.CodeStatus.OK, "查询成功", resultList);
         }
+
         return new ResponseResult<List<OperationRole>>(ResponseResult.CodeStatus.FAIL, "参数错误", null);
     }
 }

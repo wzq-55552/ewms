@@ -97,8 +97,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         tokenEnhancerChain.setTokenEnhancers(Arrays.asList(jwtAccessTokenConverter));
         services.setTokenEnhancer(tokenEnhancerChain);
 
-        services.setAccessTokenValiditySeconds(7200); // 令牌默认有效期2小时
-        services.setRefreshTokenValiditySeconds(259200); // 刷新令牌默认有效期3天
+        //令牌有效期设置在数据库
+        //services.setAccessTokenValiditySeconds(7200); // 令牌默认有效期2小时
+        //services.setRefreshTokenValiditySeconds(259200); // 刷新令牌默认有效期3天
 
         return services;
     }

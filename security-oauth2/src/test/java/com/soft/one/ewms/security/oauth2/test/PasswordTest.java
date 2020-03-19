@@ -26,6 +26,11 @@ public class PasswordTest {
     public void testBCryptPasswordEncoder() {
         System.out.println(new BCryptPasswordEncoder().encode("secret"));
     }
+
+    @Test
+    public void testBCryptPasswordEncoder2() {
+        System.out.println(passwordEncoder.matches("123456","$2a$10$M6n1NDykHKOPhjEgg4JlA.RYdd352PVMSZyryG7Okg3ZLjhjlUds6"));
+    }
 }
 
 

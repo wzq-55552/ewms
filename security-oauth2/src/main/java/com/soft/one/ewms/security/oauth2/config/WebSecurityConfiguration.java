@@ -41,7 +41,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     // 资源服务器需要该地址来验证token是否符合
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/oauth/check_token");
+        web.ignoring().antMatchers("/oauth/check_token")
+                .antMatchers("/oauth/login")
+                .antMatchers("/createImg");
     }
 
     //自己实现用户权限认证，绑定数据库

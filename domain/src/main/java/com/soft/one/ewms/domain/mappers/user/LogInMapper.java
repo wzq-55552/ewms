@@ -23,5 +23,5 @@ public interface LogInMapper extends MyMapper<LogIn> {
      * @param userId
      * @return
      */
-    List<LogIn> selectByUserIdAndOutDate(String userId);
+    LogIn selectByUserIdAndOutDate(String userId);
 }

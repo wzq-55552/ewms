@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.soft.one.ewms.domain.mappers.user.FunctionMenuMapper;
 import com.soft.one.ewms.business.user.service.FunctionMenuService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class FunctionMenuServiceImpl implements FunctionMenuService{
 
     @Resource

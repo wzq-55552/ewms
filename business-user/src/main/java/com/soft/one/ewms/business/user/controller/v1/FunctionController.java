@@ -3,24 +3,16 @@ package com.soft.one.ewms.business.user.controller.v1;
 import com.soft.one.ewms.business.user.service.FunctionMenuService;
 import com.soft.one.ewms.business.user.service.FunctionRangeService;
 import com.soft.one.ewms.business.user.service.FunctionRoleService;
-import com.soft.one.ewms.commons.constants.EsConstant;
 import com.soft.one.ewms.commons.dto.ResponseResult;
 import com.soft.one.ewms.domain.dtos.user.FunctionDto;
-import com.soft.one.ewms.domain.dtos.user.OperationDto;
 import com.soft.one.ewms.domain.pojos.user.FunctionMenu;
 import com.soft.one.ewms.domain.pojos.user.FunctionRange;
 import com.soft.one.ewms.domain.pojos.user.FunctionRole;
-import com.soft.one.ewms.domain.pojos.user.OperationRole;
-import io.searchbox.client.JestClient;
-import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +32,7 @@ import java.util.Map;
  * @date 2020/2/19
  */
 @RestController
+@CrossOrigin
 @Api(tags = "功能角色和功能菜单")
 @RequestMapping("/function")
 public class FunctionController {
@@ -54,8 +46,6 @@ public class FunctionController {
     @Resource
     private FunctionRangeService functionRangeService;
 
-    @Autowired
-    private JestClient jestClient;
 
     // 功能菜单
 
@@ -140,8 +130,7 @@ public class FunctionController {
 
     /**
      * 查询功能
-     * description用引用Elasticsearch
-     * 其他组合模糊搜索
+     * 组合模糊搜索
      * @param functionMenu
      * @return
      */
@@ -152,41 +141,14 @@ public class FunctionController {
         if (functionMenu != null){
             List<FunctionMenu> resultList = new ArrayList<>();
 
-            // 当只有角色关键词不为空时，Elasticsearch搜索，分词中文搜索
-            if (!StringUtils.isBlank(functionMenu.getDescription()) && StringUtils.isBlank(functionMenu.getFName())
-                && StringUtils.isBlank(functionMenu.getFId()) && StringUtils.isBlank(functionMenu.getFUrl())){
-                // 单条件查询，中文关键词，分词
-                // 构建查询条件 jestClient
-                // 根据关键字查询索引库
-                SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-                // 查询条件，字段title匹配，matchQuery模糊搜索，比like高级，关键字的部分词也可以匹配
-                searchSourceBuilder.query(QueryBuilders.matchQuery("description", functionMenu.getDescription()));
-                Search search = new Search.Builder(searchSourceBuilder.toString())
-                        .addIndex(EsConstant.INDEX_FUNCTION_MENU) //索引库类型，登录档
-                        .addType(EsConstant.DEFAULT_DOC)   //查所有类型的数据
-                        .build();
-                try {
-                    // 获取结果
-                    SearchResult searchResult = jestClient.execute(search);
-                    // 查数据库，补充数据
-                    List<FunctionMenu> sourceAsObjectList = searchResult.getSourceAsObjectList(FunctionMenu.class);
-                    // 筛选补充字段数据，获取的数据只有部分字段
-                    for (FunctionMenu functionMenuIndex : sourceAsObjectList) {
-                        // 补全信息
-                        functionMenuIndex = functionMenuService.selectOne(functionMenuIndex);
-                        if(functionMenuIndex == null){
-                            continue;
-                        }
-                        resultList.add(functionMenuIndex);
-                    }
-                    return new ResponseResult<List<FunctionMenu>>(ResponseResult.CodeStatus.OK, "查询成功",resultList);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }else{
+            //至少一个不为空
+            if (!StringUtils.isBlank(functionMenu.getDescription()) || !StringUtils.isBlank(functionMenu.getFName())
+                || !StringUtils.isBlank(functionMenu.getFId()) || !StringUtils.isBlank(functionMenu.getFUrl())){
+
                 // 组合模糊搜索
                 resultList = functionMenuService.selectByAll(functionMenu);
                 return new ResponseResult<List<FunctionMenu>>(ResponseResult.CodeStatus.OK, "查询成功", resultList);
+
             }
             return new ResponseResult<List<FunctionMenu>>(ResponseResult.CodeStatus.FAIL, "内部错误",null);
         }
@@ -324,8 +286,7 @@ public class FunctionController {
 
     /**
      * 查询功能角色
-     * id、角色中文名，英文名，模糊搜索
-     * 单角色描述名，引用Elasticsearch搜索，中文分词器
+     * id、描述名、角色中文名，英文名，模糊搜索
      * @param functionRole id跟角色名
      * @return
      */
@@ -338,43 +299,10 @@ public class FunctionController {
                 !StringUtils.isBlank(functionRole.getDescription()) || !StringUtils.isBlank(functionRole.getFrName()))){
             List<FunctionRole> resultList = new ArrayList<>();
 
-            // 当只有角色描述名关键词不为空时，Elasticsearch搜索，分词中文搜索
-            if (!StringUtils.isBlank(functionRole.getDescription()) &&
-                    StringUtils.isBlank(functionRole.getFrName()) && StringUtils.isBlank(functionRole.getFrId())){
-                // 单条件查询，中文关键词，分词
-                // 构建查询条件 jestClient
-                // 根据关键字查询索引库
-                SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-                // 查询条件，字段title匹配，matchQuery模糊搜索，比like高级，关键字的部分词也可以匹配
-                searchSourceBuilder.query(QueryBuilders.matchQuery("description", functionRole.getDescription()));
-                Search search = new Search.Builder(searchSourceBuilder.toString())
-                        .addIndex(EsConstant.INDEX_FUNCTION_ROLE) //索引库类型，登录档
-                        .addType(EsConstant.DEFAULT_DOC)   //查所有类型的数据
-                        .build();
-                try {
-                    // 获取结果
-                    SearchResult searchResult = jestClient.execute(search);
-                    // 查数据库，补充数据
-                    List<FunctionRole> sourceAsObjectList = searchResult.getSourceAsObjectList(FunctionRole.class);
-                    // 筛选补充字段数据，获取的数据只有部分字段
-                    for (FunctionRole functionRoleIndex : sourceAsObjectList) {
-                        // 补全信息
-                        functionRoleIndex = functionRoleService.selectOne(functionRoleIndex);
-                        if(functionRoleIndex == null){
-                            continue;
-                        }
-                        resultList.add(functionRoleIndex);
-                    }
-                    return new ResponseResult<List<FunctionRole>>(ResponseResult.CodeStatus.OK, "查询成功",resultList);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                // 组合模糊搜索
-                resultList = functionRoleService.selectByAll(functionRole);
-                return new ResponseResult<List<FunctionRole>>(ResponseResult.CodeStatus.OK, "查询成功", resultList);
-            }
-            return new ResponseResult<List<FunctionRole>>(ResponseResult.CodeStatus.FAIL, "内部错误",null);
+            // 组合模糊搜索
+            resultList = functionRoleService.selectByAll(functionRole);
+            return new ResponseResult<List<FunctionRole>>(ResponseResult.CodeStatus.OK, "查询成功", resultList);
+
         }
         return new ResponseResult<List<FunctionRole>>(ResponseResult.CodeStatus.FAIL, "参数错误", null);
     }

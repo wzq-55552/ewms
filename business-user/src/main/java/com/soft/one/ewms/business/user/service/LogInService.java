@@ -30,12 +30,6 @@ public interface LogInService{
      */
     List<LogIn> selectByAll(String userId, String equipment, Date beginDate, Date endDate);
 
-    /**
-     * 查询该用户OutDate为空的数据
-     * @param userId
-     * @return
-     */
-    List<LogIn> selectByUserIdAndOutDate(String userId);
 
     int updateByPrimaryKeySelective(LogIn logIn);
 }

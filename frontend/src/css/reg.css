@@ -1,0 +1,19 @@
+@charset "utf-8";
+.wrap{
+    box-sizing: border-box;
+    height: 100vh;
+    background: url("../statics/bj.jpg") no-repeat center;
+    background-size: auto 100vh;
+    position:  relative;
+}
+.form-data{
+    background-color: #ffffff;
+    width: 460px;
+    left: 50%;
+    margin-left: -230px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0,0,0,.1);
+    padding: 20px 0px 30px 20px;
+    position: fixed;
+    top: 15%;
+}

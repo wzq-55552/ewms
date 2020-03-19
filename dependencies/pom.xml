@@ -27,6 +27,8 @@
         <swagger.version>2.9.2</swagger.version>
         <!-- swagger导出 -->
         <swagger2markup.version>1.3.3</swagger2markup.version>
+        <!-- ip地理位置获取 -->
+        <ip2region.version>1.7.2</ip2region.version>
     </properties>
 
     <dependencyManagement>
@@ -119,6 +121,13 @@
                 <groupId>io.github.swagger2markup</groupId>
                 <artifactId>swagger2markup</artifactId>
                 <version>${swagger2markup.version}</version>
+            </dependency>
+
+            <!-- ip地理位置获取 -->
+            <dependency>
+                <groupId>org.lionsoul</groupId>
+                <artifactId>ip2region</artifactId>
+                <version>${ip2region.version}</version>
             </dependency>
         </dependencies>
 

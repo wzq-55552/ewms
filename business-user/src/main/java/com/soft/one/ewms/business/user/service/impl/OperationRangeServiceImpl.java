@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.soft.one.ewms.domain.mappers.user.OperationRangeMapper;
 import com.soft.one.ewms.business.user.service.OperationRangeService;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional
 public class OperationRangeServiceImpl implements OperationRangeService{
 
     @Resource

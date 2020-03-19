@@ -29,7 +29,6 @@
         <module>commons</module>
         <module>domain</module>
         <module>api</module>
-        <module>configuration</module>
         <!-- 微服务 -->
         <module>security-oauth2</module>
         <module>business-user</module>

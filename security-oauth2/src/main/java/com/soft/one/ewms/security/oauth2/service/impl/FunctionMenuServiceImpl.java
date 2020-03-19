@@ -5,6 +5,7 @@ import com.soft.one.ewms.domain.pojos.user.FunctionMenu;
 import com.soft.one.ewms.domain.pojos.user.FunctionRange;
 import com.soft.one.ewms.security.oauth2.service.FunctionMenuService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;

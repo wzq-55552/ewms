@@ -5,12 +5,14 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.soft.one.ewms.domain.mappers.user.LogInMapper;
 import com.soft.one.ewms.business.user.service.LogInService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class LogInServiceImpl implements LogInService{
 
     @Resource
@@ -48,11 +50,6 @@ public class LogInServiceImpl implements LogInService{
             endDate = cal.getTime();
         }
         return logInMapper.selectByAll(userId, equipment, beginDate, endDate);
-    }
-
-    @Override
-    public List<LogIn> selectByUserIdAndOutDate(String userId) {
-        return logInMapper.selectByUserIdAndOutDate(userId);
     }
 
     @Override

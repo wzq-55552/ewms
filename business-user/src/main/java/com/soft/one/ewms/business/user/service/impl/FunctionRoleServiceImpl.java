@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.soft.one.ewms.domain.mappers.user.FunctionRoleMapper;
 import com.soft.one.ewms.business.user.service.FunctionRoleService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class FunctionRoleServiceImpl implements FunctionRoleService{
 
     @Resource

@@ -1,6 +1,5 @@
 package com.soft.one.ewms.business.user.controller.v1;
 
-import com.soft.one.ewms.business.user.service.FunctionRangeService;
 import com.soft.one.ewms.business.user.service.FunctionRoleService;
 import com.soft.one.ewms.business.user.service.LogInService;
 import com.soft.one.ewms.business.user.service.OperationRoleService;
@@ -24,6 +23,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,6 +42,7 @@ import java.util.List;
  * @date 2020/2/20
  */
 @RestController
+@CrossOrigin
 @Api(tags = "管理员用户的一些操作")
 public class AdminController {
 

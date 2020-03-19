@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.soft.one.ewms.domain.mappers.user.FunctionRangeMapper;
 import com.soft.one.ewms.business.user.service.FunctionRangeService;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class FunctionRangeServiceImpl implements FunctionRangeService{
 
     @Resource

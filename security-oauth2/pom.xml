@@ -25,6 +25,12 @@
         </dependency>
         <!-- Spring Boot End -->
 
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <!--Spring Security-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -64,6 +70,14 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <!-- 自定义commons包的工具类 -->
+        <dependency>
+            <groupId>com.soft.one</groupId>
+            <artifactId>commons</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- 自定义domain包 -->
