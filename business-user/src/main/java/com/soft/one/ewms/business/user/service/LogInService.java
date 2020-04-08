@@ -32,4 +32,6 @@ public interface LogInService{
 
 
     int updateByPrimaryKeySelective(LogIn logIn);
+
+    LogIn selectByUserIdAndOutDate(String userId);
 }

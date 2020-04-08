@@ -1,8 +1,8 @@
-package com.soft.one.ewms.security.oauth2.service.impl;
+package com.soft.one.ewms.business.user.service.impl;
 
+import com.soft.one.ewms.business.user.service.ControlInService;
 import com.soft.one.ewms.domain.mappers.user.ControlInMapper;
 import com.soft.one.ewms.domain.pojos.user.ControlIn;
-import com.soft.one.ewms.security.oauth2.service.ControlInService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,4 +25,8 @@ public class ControlInServiceImpl implements ControlInService {
         return controlInMapper.insert(controlIn);
     }
 
+    @Override
+    public int delete(ControlIn controlIn) {
+        return controlInMapper.delete(controlIn);
+    }
 }

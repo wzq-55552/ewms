@@ -15,7 +15,7 @@ import java.util.List;
 @ApiModel(value = "功能角色DTO，增加修改功能角色都是传这些")
 public class FunctionDto implements Serializable {
 
-    private static final long serialVersionUID = -3839947601151280317L;
+    private static final long serialVersionUID = -8029859748672637781L;
 
     /**
      * 功能角色ID
@@ -39,6 +39,6 @@ public class FunctionDto implements Serializable {
      * 权限id集合
      */
     @ApiModelProperty(value = "角色的权限id集合，空的话则是无权限")
-    private List<String> fIds;
+    private List<String> lists;
 
 }

@@ -42,7 +42,7 @@ import java.util.List;
  * @date 2020/2/20
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Api(tags = "管理员用户的一些操作")
 public class AdminController {
 

@@ -19,10 +19,15 @@ import java.util.Random;
  */
 public class VerifyUtil {
     public static final String RANDOMCODEKEY= "RANDOMREDISKEY";//放到session中的key
-    private String randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";//随机产生数字与字母组合的字符串
-    private int width = 95;// 图片宽
-    private int height = 25;// 图片高
-    private int lineSize = 40;// 干扰线数量
+    //private String randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";//随机产生数字与字母组合的字符串
+    private String randString = "0123456789abcdefghijklmnopqrstuvwxyz";//随机产生数字与字母组合的字符串
+//    private int width = 95;// 图片宽
+//    private int height = 25;// 图片高
+//    private int lineSize = 40;// 干扰线数量
+//    private int stringNum = 4;// 随机产生字符数量
+    private int width = 130;// 图片宽
+    private int height = 53;// 图片高
+    private int lineSize = 110;// 干扰线数量
     private int stringNum = 4;// 随机产生字符数量
 
     private Random random = new Random();
@@ -31,7 +36,7 @@ public class VerifyUtil {
      * 获得字体
      */
     private Font getFont() {
-        return new Font("Fixedsys", Font.CENTER_BASELINE, 18);
+        return new Font("Fixedsys", Font.CENTER_BASELINE, 30);
     }
 
     /**
@@ -57,7 +62,7 @@ public class VerifyUtil {
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
         Graphics g = image.getGraphics();// 产生Image对象的Graphics对象,改对象可以在图像上进行各种绘制操作
         g.fillRect(0, 0, width, height);//图片大小
-        g.setFont(new Font("Times New Roman", Font.ROMAN_BASELINE, 18));//字体大小
+        g.setFont(new Font("Times New Roman", Font.ROMAN_BASELINE, 30));//字体大小
         g.setColor(getRandColor(110, 133));//字体颜色
         // 绘制干扰线
         for (int i = 0; i <= lineSize; i++) {
@@ -94,8 +99,8 @@ public class VerifyUtil {
         String rand = String.valueOf(getRandomString(random.nextInt(randString
                 .length())));
         randomString += rand;
-        g.translate(random.nextInt(3), random.nextInt(3));
-        g.drawString(rand, 13 * i, 16);
+        g.translate(random.nextInt(8), random.nextInt(8));
+        g.drawString(rand, 20 * i, 25);
         return randomString;
     }
 

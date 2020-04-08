@@ -19,6 +19,11 @@ public class LogInServiceImpl implements LogInService{
     private LogInMapper logInMapper;
 
     @Override
+    public LogIn selectByUserIdAndOutDate(String userId) {
+        return logInMapper.selectByUserIdAndOutDate(userId);
+    }
+
+    @Override
     public int insert(LogIn logIn) {
         return logInMapper.insert(logIn);
     }

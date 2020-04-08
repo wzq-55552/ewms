@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class UserDetalisServiceImpl implements UserDetailsService {
             // 声明用户授权
             if (functionMenus!=null && functionMenus.size()!=0){
                 functionMenus.forEach(functionMenu -> {
-                    if (functionMenu != null && functionMenu.getFName() != null){
+                    if (functionMenu != null && !StringUtils.isEmpty(functionMenu.getFName())){
                         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(functionMenu.getFName());
                         grantedAuthorities.add(grantedAuthority);
                     }

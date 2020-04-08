@@ -1,10 +1,12 @@
 package com.soft.one.ewms.domain.dtos.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -36,12 +38,16 @@ public class LoginSearchDto implements Serializable {
     /**
      * 起始时间，yyyy-mm-dd hh:mm
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "Date数据，起始时间，一个时间段来搜索,yyyy-mm-dd hh:mm:ss")
     private Date beginDate;
 
     /**
      * 结束时间，yyyy-mm-dd hh:mm
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "结束时间，Date数据，一个时间段来搜索,yyyy-mm-dd hh:mm:ss")
     private Date endDate;
 }

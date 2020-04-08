@@ -31,7 +31,7 @@
         and <![CDATA[In_date >= #{beginDate, jdbcType=TIMESTAMP} ]]>
       </if>
       <if test="endDate != null">
-        <![CDATA[and Out_date <= #{endDate, jdbcType=TIMESTAMP} ]]>
+        and <![CDATA[Out_date <= #{endDate, jdbcType=TIMESTAMP} ]]>
       </if>
     </where>
   </select>

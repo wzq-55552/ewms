@@ -32,7 +32,7 @@ import java.util.Map;
  * @date 2020/2/19
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Api(tags = "功能角色和功能菜单")
 @RequestMapping("/function")
 public class FunctionController {
@@ -219,8 +219,8 @@ public class FunctionController {
             int k = functionRoleService.insert(functionRole);
             // 权限集合不为空
             // 增加功能与角色的联系
-            if (functionDto.getFIds() != null && functionDto.getFIds().size() > 0){
-                functionRangeService.insertList(functionDto.getFrId(), functionDto.getFIds());
+            if (functionDto.getLists() != null && functionDto.getLists().size() > 0){
+                functionRangeService.insertList(functionDto.getFrId(), functionDto.getLists());
             }
             if (k > 0){
                 return new ResponseResult<Void>(ResponseResult.CodeStatus.OK, "添加功能角色成功");
@@ -254,8 +254,8 @@ public class FunctionController {
             // 更新功能角色权限
             // 有可能权限为空
             functionRangeService.deleteByFrId(functionDto.getFrId());
-            if (functionDto.getFIds() != null){
-                functionRangeService.insertList(functionDto.getFrId(), functionDto.getFIds());
+            if (functionDto.getLists() != null){
+                functionRangeService.insertList(functionDto.getFrId(), functionDto.getLists());
             }
             return new ResponseResult<Void>(ResponseResult.CodeStatus.OK, "修改功能角色成功");
         }

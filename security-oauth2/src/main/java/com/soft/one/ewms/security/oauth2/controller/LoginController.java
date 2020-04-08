@@ -15,18 +15,18 @@ import com.soft.one.ewms.security.oauth2.service.TimeArgsService;
 import com.soft.one.ewms.security.oauth2.service.UserInformationService;
 import com.soft.one.ewms.security.oauth2.utlis.AuthToken;
 import com.soft.one.ewms.security.oauth2.utlis.LoginDto;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/3/11
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class LoginController {
 
     @Resource
@@ -87,7 +87,7 @@ public class LoginController {
 
         String str = stringRedisTemplate.boundValueOps(loginDto.getRandString()).get();
         if (StringUtils.isEmpty(str)){
-            return new ResponseResult<AuthToken>(ResponseResult.CodeStatus.FAIL,"验证码错误", null);
+            return new ResponseResult<AuthToken>(1,"验证码错误或验证码失效", null);
         }
 
         //自己先验证账号，密码。框架也会帮我们验证,这里可自定义返回信息。
@@ -148,57 +148,20 @@ public class LoginController {
     }
 
     /**
-     * 用户自己退出登录，记录操作
-     * 前端去掉token就可以，然后发送这个请求
-     * @param userIdMap
+     * 刷新令牌
+     * @param token refresh_token
      * @return
      */
-    @PostMapping("/user/logout/own")
-    @ApiOperation(value = "用户自己退出登录，记录操作")
-    @PreAuthorize("isAuthenticated()") // 不用权限，请求头还是得有token
-    public ResponseResult<Void> LogoutUser(@RequestBody Map<String,String> userIdMap){
-        if (userIdMap != null){
-            String userId = userIdMap.get("userId");
-            return content(userId, 0);
+    @PostMapping("/oauth/refresh/token")
+    public ResponseResult<AuthToken> refresh(@RequestBody Map<String, String> token) {
+        //登录之后生成令牌的数据返回，请求security认证授权
+        if (StringUtils.isEmpty(token.get("refreshToken"))){
+            return new ResponseResult<AuthToken>(ResponseResult.CodeStatus.FAIL, "刷新令牌为空", null);
         }
-        return new ResponseResult<Void>(ResponseResult.CodeStatus.FAIL,"参数数据为空");
-    }
-
-    /**
-     * 系统退出用户登录，记录操作
-     * 前端去掉token就可以
-     * 前端去掉token就可以，然后发送这个请求
-     * @param userIdMap
-     * @return
-     */
-    @PostMapping("/user/logout/system")
-    @ApiOperation(value = "系统退出用户登录，记录操作")
-    @PreAuthorize("isAuthenticated()") // 不用权限，请求头还是得有token
-    public ResponseResult<Void> LogoutSystem(@RequestBody Map<String,String> userIdMap){
-        if (userIdMap != null){
-            String userId = userIdMap.get("userId");
-            return content(userId, 1);
-        }
-        return new ResponseResult<Void>(ResponseResult.CodeStatus.FAIL,"参数数据为空");
-    }
-
-    // 登出的主要业务
-    public ResponseResult<Void> content(String userId, Integer type){
-        // 控制档删除
-        ControlIn controlIn = controlInService.selectByPrimaryKey(userId);
-        int k = controlInService.delete(controlIn);
-
-        // 记录档记录退出时间和类型
-        LogIn logIn = logInService.selectByUserIdAndOutDate(userId);
-        if (logIn != null){
-            logIn.setOutDate(new Date());
-            logIn.setOutType(type);
-            int k2 = logInService.updateByPrimaryKeySelective(logIn);
-            if (k2 > 0 && k > 0){
-                return new ResponseResult<Void>(ResponseResult.CodeStatus.OK,"操作成功");
-            }
-        }
-        return new ResponseResult<Void>(ResponseResult.CodeStatus.FAIL,"操作失败");
+        AuthToken authToken = authService.refreshToken(token.get("refreshToken"), clientId, clientSecret);
+        //不需要提醒修改密码
+        authToken.setIsRemind(0);
+        return new ResponseResult<AuthToken>(ResponseResult.CodeStatus.OK,"令牌生成成功", authToken);
     }
 
     @Resource
@@ -209,8 +172,8 @@ public class LoginController {
      * @param response
      * @throws Exception
      */
-    @RequestMapping("/createImg")
-    public void createImg(HttpServletResponse response) throws Exception {
+    @GetMapping("/createImg/{rand}")
+    public void createImg(HttpServletResponse response, @PathVariable(value = "rand") String rand) throws Exception {
         try {
             response.setContentType("image/jpeg"); //设置相应类型,告诉浏览器输出的内容为图片
             response.setHeader("Pragma", "No-cache"); //设置响应头信息，告诉浏览器不要缓存此内容
@@ -218,11 +181,11 @@ public class LoginController {
             response.setDateHeader("Expire", 0);
             VerifyUtil randomValidateCode = new VerifyUtil();
             String randString = randomValidateCode.getRandcode(/*request, */response);//输出验证码图片
-            System.out.println(randString);
-            //将生成的随机验证码存放到redis中
-            if (StringUtils.isEmpty(stringRedisTemplate.boundValueOps(randString).get())){
-                stringRedisTemplate.opsForValue().set(randString, randString,3*60, TimeUnit.SECONDS);
-            }
+
+            //将生成的随机验证码存放到redis中,缓存3分钟后过期
+            //大小写的所有可能都可以
+            dfs(randString.toCharArray(),-1);
+
             //"RANDOMVALIDATECODEKEY"
             //(String) request.getSession().getAttribute(
             //"RANDOMREDISKEY"), Long.parseLong("60000")); //缓存一分钟
@@ -230,4 +193,40 @@ public class LoginController {
             System.err.println("获取验证码异常："+e);
         }
     }
+
+    /**
+     * 遍历所有组合
+     * @param arr
+     * @param len
+     */
+    public void dfs(char[] arr ,int len){
+        len++;
+        //达到4长度，存到redis,缓存3分钟
+        if (len == 4){
+            String s = new String(arr);
+            if (StringUtils.isEmpty(stringRedisTemplate.boundValueOps(s).get())){
+                stringRedisTemplate.opsForValue().set(s, s,3*60, TimeUnit.SECONDS);
+            }
+            return;
+        }
+
+        char c = arr[len];
+        if (c>=97){
+            //大写字母分支
+            arr[len] = (char)(c - 32);
+            dfs(arr,len);
+            //回溯
+            arr[len] = c;
+        }
+        //小写字母或数字分支
+        dfs(arr,len);
+        //回溯
+        arr[len] = c;
+    }
+
+//    public static void main(String[] args) {
+//        String s = "abcd";
+//        dfs(s.toCharArray(), -1);
+//    }
+
 }

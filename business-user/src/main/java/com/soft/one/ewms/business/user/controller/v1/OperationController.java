@@ -33,7 +33,7 @@ import java.util.Map;
  * @date 2020/2/19
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Api(tags = "操作资料角色")
 @RequestMapping("/operation")
 public class OperationController {

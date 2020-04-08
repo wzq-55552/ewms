@@ -1,11 +1,13 @@
 package com.soft.one.ewms.domain.dtos.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -68,6 +70,8 @@ public class UserInformationDto implements Serializable {
     /**
      * 密码更改日期与时间，yyyy-mm-dd hh:mm
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "密码更改日期与时间，Date类型，精确到秒，yyyy-mm-dd hh:mm:ss")
     private Date pswDate;
 

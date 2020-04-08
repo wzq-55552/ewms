@@ -28,7 +28,8 @@ public class AuthServiceImpl implements AuthService {
     @Resource
     private RestTemplate restTemplate;
 
-    private static final String GRAND_TYPE = "password";//授权模式 密码模式
+    private static final String GRAND_TYPE1 = "password";//授权模式：密码模式
+    private static final String GRAND_TYPE2 = "refresh_token";//授权模式 刷新令牌
 
     /**
      * 授权认证方法
@@ -40,19 +41,27 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthToken login(LoginDto loginDto,String clientId, String clientSecret) {
         //申请令牌
-        return applyToken(loginDto.getUserID(),loginDto.getUserPsw(),clientId, clientSecret);
+        return applyToken(GRAND_TYPE1,null, loginDto.getUserID(),loginDto.getUserPsw(),clientId, clientSecret);
+    }
+
+    //刷新令牌
+    @Override
+    public AuthToken refreshToken(String refresh_token,String clientId, String clientSecret) {
+        return applyToken(GRAND_TYPE2,refresh_token,null,null,clientId, clientSecret);
     }
 
 
     /****
-     * 认证方法，这里是密码模式
+     * 认证方法，这里是密码模式和刷新令牌
+     * @param type：类型
+     * @param refresh_token：刷新token
      * @param username:用户登录名字
      * @param password：用户密码
      * @param clientId：配置文件中的客户端ID
      * @param clientSecret：配置文件中的秘钥
      * @return
      */
-    private AuthToken applyToken(String username, String password, String clientId, String clientSecret) {
+    private AuthToken applyToken(String type, String refresh_token, String username, String password, String clientId, String clientSecret) {
         //选中认证服务的地址
 //        ServiceInstance serviceInstance = loadBalancerClient.choose("security-oauth2");
 //        if (serviceInstance == null) {
@@ -64,11 +73,15 @@ public class AuthServiceImpl implements AuthService {
         //定义body
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         //授权方式
-        formData.add("grant_type", GRAND_TYPE);
-        //账号
-        formData.add("username", username);
-        //密码
-        formData.add("password", password);
+        formData.add("grant_type", type);
+        if (type.equals(GRAND_TYPE1)){
+            //账号
+            formData.add("username", username);
+            //密码
+            formData.add("password", password);
+        }else {
+            formData.add("refresh_token", refresh_token);
+        }
         //定义头
         MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
         header.add("Authorization", httpbasic(clientId, clientSecret));
@@ -93,7 +106,7 @@ public class AuthServiceImpl implements AuthService {
         }
         if(map == null || map.get("access_token") == null || map.get("refresh_token") == null || map.get("jti") == null) {
             //jti是jwt令牌的唯一标识作为用户身份令牌
-            throw new RuntimeException("创建令牌失败！");
+            throw new RuntimeException("获取令牌失败！");
         }
 
         //将响应数据封装成AuthToken对象
